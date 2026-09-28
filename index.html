@@ -1,0 +1,2165 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gemini Pro — Potência e Inteligência Google</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans for Google One aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            google: {
+              blue: '#1a73e8',
+              blueDark: '#1557b0',
+              blueLight: '#e8f0fe',
+              grayBg: '#f8f9fa',
+              cardBg: '#ffffff',
+              border: '#dadce0',
+              dark: '#202124',
+              muted: '#5f6368',
+              green: '#1e8e3e',
+              yellow: '#f9ab00',
+              red: '#d93025'
+            },
+            gemini: {
+              gradientStart: '#1a73e8',
+              gradientMid: '#9334ea',
+              gradientEnd: '#ec4899',
+            }
+          },
+          boxShadow: {
+            'google': '0 1px 3px 0 rgba(60,64,67,0.15), 0 4px 8px 3px rgba(60,64,67,0.08)',
+            'google-hover': '0 2px 6px 2px rgba(60,64,67,0.15), 0 8px 16px 4px rgba(60,64,67,0.1)',
+            'gemini-glow': '0 0 40px -10px rgba(147, 51, 234, 0.35)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Google One signature gradient text */
+    .gemini-gradient-text {
+      background: linear-gradient(135deg, #1a73e8 0%, #8b5cf6 45%, #ec4899 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gemini-gradient-bg {
+      background: linear-gradient(135deg, #1a73e8 0%, #7c3aed 50%, #db2777 100%);
+    }
+
+    .gemini-border-glow {
+      position: relative;
+    }
+    .gemini-border-glow::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      padding: 2px;
+      background: linear-gradient(135deg, #4285f4, #9334ea, #ec4899, #fbbc04);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* Ambient pulse */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(1deg); }
+    }
+    .animate-float {
+      animation: floatSlow 6s ease-in-out infinite;
+    }
+
+    /* Scroll reveal transitions */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f3f4;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #dadce0;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #bdc1c6;
+    }
+  </style>
+</head>
+
+<body class="bg-google-grayBg text-google-dark font-sans antialiased overflow-x-hidden">
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-google-border/70 transition-all duration-300" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 py-3.5 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-google-blue rounded-lg p-1">
+        <div class="relative w-8 h-8 flex items-center justify-center">
+          <svg class="w-8 h-8 transition-transform duration-500 group-hover:rotate-45" viewBox="0 0 24 24" fill="none">
+            <path d="M12 0C12 6.627 6.627 12 0 12C6.627 12 12 17.373 12 24C12 17.373 17.373 12 24 12C17.373 12 12 6.627 12 0Z" fill="url(#gemini-sparkle-nav)"/>
+            <defs>
+              <linearGradient id="gemini-sparkle-nav" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#1A73E8"/>
+                <stop offset="0.5" stop-color="#8B5CF6"/>
+                <stop offset="1" stop-color="#EC4899"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="flex items-baseline gap-1.5">
+          <span class="text-xl font-bold tracking-tight text-google-dark">Google</span>
+          <span class="text-xl font-medium tracking-tight text-gray-700">Gemini</span>
+          <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-google-blue border border-blue-200">PRO</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-[15px] font-medium text-google-muted">
+        <a href="#beneficios" class="hover:text-google-blue transition-colors duration-200" data-i18n="nav_features">Recursos</a>
+        <a href="#interativo" class="hover:text-google-blue transition-colors duration-200" data-i18n="nav_demo">Demonstração</a>
+        <a href="#comparativo" class="hover:text-google-blue transition-colors duration-200" data-i18n="nav_compare">Comparativo</a>
+        <a href="#planos" class="hover:text-google-blue transition-colors duration-200" data-i18n="nav_pricing">Planos</a>
+        <a href="#faq" class="hover:text-google-blue transition-colors duration-200" data-i18n="nav_faq">Dúvidas</a>
+      </nav>
+
+      <!-- Right Actions: CTA + Mobile Toggle -->
+      <div class="flex items-center gap-3 sm:gap-4">
+        <!-- Google One Style CTA Button -->
+        <button onclick="handleCheckout()" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold rounded-full text-white bg-google-blue hover:bg-google-blueDark transition-all duration-200 shadow-sm hover:shadow-google focus:ring-4 focus:ring-blue-100">
+          <span data-i18n="nav_cta">Assinar Agora</span>
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-google-muted hover:bg-gray-100 focus:outline-none" aria-label="Abrir menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden px-4 pt-2 pb-6 bg-white border-b border-google-border space-y-3">
+      <a href="#beneficios" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-google-muted hover:text-google-blue" data-i18n="nav_features">Recursos</a>
+      <a href="#interativo" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-google-muted hover:text-google-blue" data-i18n="nav_demo">Demonstração</a>
+      <a href="#comparativo" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-google-muted hover:text-google-blue" data-i18n="nav_compare">Comparativo</a>
+      <a href="#planos" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-google-muted hover:text-google-blue" data-i18n="nav_pricing">Planos</a>
+      <a href="#faq" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-google-muted hover:text-google-blue" data-i18n="nav_faq">Dúvidas</a>
+      <div class="pt-3">
+        <button onclick="handleCheckout()" class="w-full py-3 text-center rounded-full text-white font-semibold bg-google-blue shadow">
+          <span data-i18n="nav_cta">Assinar Agora</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden bg-gradient-to-b from-white via-google-grayBg to-google-grayBg">
+      <!-- Ambient Glow Orbs -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-r from-blue-300/30 via-purple-300/20 to-pink-300/30 blur-3xl pointer-events-none -z-10 rounded-full"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        
+        <!-- Google One Style Pill Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-google-border shadow-sm mb-6 hover:shadow transition-all duration-300 cursor-default">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
+            <path d="M12 0C12 6.627 6.627 12 0 12C6.627 12 12 17.373 12 24C12 17.373 17.373 12 24 12C17.373 12 12 6.627 12 0Z" fill="url(#hero-badge-star)"/>
+            <defs>
+              <linearGradient id="hero-badge-star" x1="0" y1="0" x2="24" y2="24">
+                <stop stop-color="#1A73E8"/>
+                <stop offset="1" stop-color="#EC4899"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="text-xs sm:text-sm font-semibold text-google-dark" data-i18n="hero_pill">Nova Era de Inteligência Artificial Google</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        </div>
+
+        <!-- Headline with Gemini Gradient -->
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-google-dark max-w-5xl mx-auto leading-[1.12]">
+          <span data-i18n="hero_title_p1">Eleve seu potencial com o</span><br/>
+          <span class="gemini-gradient-text" data-i18n="hero_title_gradient">Gemini Pro</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="mt-6 text-lg sm:text-xl text-google-muted max-w-3xl mx-auto leading-relaxed" data-i18n="hero_subtitle">
+          Nossa inteligência multimodal mais refinada. Acesse uma janela de contexto massiva de até 2 milhões de tokens, raciocínio computacional sênior e integração perfeita ao ecossistema Google.
+        </p>
+
+        <!-- CTA Buttons Row -->
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button onclick="handleCheckout()" class="w-full sm:w-auto px-8 py-3.5 rounded-full text-base font-semibold text-white bg-google-blue hover:bg-google-blueDark transition-all duration-200 shadow-google hover:shadow-google-hover flex items-center justify-center gap-2 group">
+            <span data-i18n="hero_primary_cta">Assinar Gemini Pro</span>
+            <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </button>
+          
+          <a href="#planos" class="w-full sm:w-auto px-8 py-3.5 rounded-full text-base font-semibold text-google-dark bg-white hover:bg-gray-50 border border-google-border transition-all duration-200 shadow-sm hover:shadow flex items-center justify-center gap-2">
+            <span data-i18n="hero_secondary_cta">Ver planos e valores</span>
+          </a>
+        </div>
+
+        <!-- Guarantee Notice -->
+        <p class="mt-3.5 text-xs text-google-muted flex items-center justify-center gap-1.5" data-i18n="hero_guarantee">
+          <svg class="w-4 h-4 text-emerald-600 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+          Acesso imediato • Cancele online a qualquer momento com 1 clique
+        </p>
+
+        <!-- Hero Interactive Multimodal Preview Card -->
+        <div class="mt-14 max-w-5xl mx-auto text-left">
+          <div class="relative rounded-3xl bg-white border border-google-border shadow-google p-4 sm:p-7 overflow-hidden">
+            
+            <!-- Window header bar -->
+            <div class="flex items-center justify-between pb-4 mb-4 border-b border-gray-100">
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                <span class="ml-2 text-xs font-mono text-gray-400">gemini-1.5-pro • context_window: 2,000,000 tokens</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-medium flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  <span data-i18n="hero_card_status">Ultra Conexão Ativa</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Content Grid inside the simulated window -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+              
+              <!-- Left: Loaded Multimodal Assets -->
+              <div class="lg:col-span-5 space-y-3">
+                <p class="text-xs font-bold uppercase tracking-wider text-google-muted" data-i18n="hero_loaded_title">Entrada Multimodal Ativa</p>
+                
+                <!-- Asset 1: PDF Document -->
+                <div class="p-3 rounded-2xl bg-google-grayBg border border-google-border/70 flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-blue-100 text-google-blue flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                  </div>
+                  <div class="overflow-hidden">
+                    <div class="text-xs font-semibold text-google-dark truncate">relatorio_financeiro_anual_2025.pdf</div>
+                    <div class="text-[11px] text-google-muted">840 páginas • 612.000 tokens</div>
+                  </div>
+                </div>
+
+                <!-- Asset 2: 4K Video File -->
+                <div class="p-3 rounded-2xl bg-google-grayBg border border-google-border/70 flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  </div>
+                  <div class="overflow-hidden">
+                    <div class="text-xs font-semibold text-google-dark truncate">reuniao_estrategica_board_q3.mp4</div>
+                    <div class="text-[11px] text-google-muted">1h 45min vídeo • Áudio sincronizado</div>
+                  </div>
+                </div>
+
+                <!-- Asset 3: Git Repository -->
+                <div class="p-3 rounded-2xl bg-google-grayBg border border-google-border/70 flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                  </div>
+                  <div class="overflow-hidden">
+                    <div class="text-xs font-semibold text-google-dark truncate">core-infra-kubernetes-v2/</div>
+                    <div class="text-[11px] text-google-muted">98.000 linhas de código Rust/Go</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right: Gemini Real-time Synthesis Response -->
+              <div class="lg:col-span-7 bg-white rounded-2xl border border-blue-100 p-4 sm:p-5 shadow-sm space-y-3.5 relative">
+                
+                <!-- Prompt simulated bubble -->
+                <div class="bg-blue-50/70 p-3 rounded-xl border border-blue-100 text-xs sm:text-sm text-google-dark font-medium flex items-start gap-2.5">
+                  <div class="w-6 h-6 rounded-full bg-google-blue text-white flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">VC</div>
+                  <div>
+                    <span class="text-google-muted text-[11px] block font-normal" data-i18n="hero_prompt_label">Seu comando:</span>
+                    <span data-i18n="hero_prompt_text">"Cruze os dados da página 412 do PDF com a decisão em 01:14:20 do vídeo e avalie o impacto no repositório de infraestrutura."</span>
+                  </div>
+                </div>
+
+                <!-- Gemini Reasoning response -->
+                <div class="space-y-2">
+                  <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-purple-600" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 0C12 6.627 6.627 12 0 12C6.627 12 12 17.373 12 24C12 17.373 17.373 12 24 12C17.373 12 12 6.627 12 0Z" fill="currentColor"/>
+                    </svg>
+                    <span class="text-xs font-bold text-gray-900" data-i18n="hero_gemini_thinking">Gemini Pro • Resposta Multimodal em 0.8s</span>
+                  </div>
+                  
+                  <div class="text-xs sm:text-sm text-gray-700 space-y-2 leading-relaxed font-sans">
+                    <p data-i18n="hero_response_1">
+                      <strong class="text-google-dark">1. Correlação Instantânea:</strong> A meta de redução de latência descrita na pág. 412 do relatório (alvo &lt; 45ms) alinha-se com a diretiva do CTO no minuto 01:14:20 da gravação.
+                    </p>
+                    <p data-i18n="hero_response_2">
+                      <strong class="text-google-dark">2. Diagnóstico no Código:</strong> Identifiquei que os arquivos <code class="font-mono bg-gray-100 px-1 py-0.5 rounded text-purple-700">ingress_controller.rs</code> e <code class="font-mono bg-gray-100 px-1 py-0.5 rounded text-purple-700">mesh_config.yaml</code> contêm buffers estáticos de 120ms que precisam ser substituídos pelo adaptador assíncrono.
+                    </p>
+                  </div>
+
+                  <!-- Quick Action Tag -->
+                  <div class="pt-2 flex flex-wrap items-center gap-2">
+                    <span class="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-emerald-100/70 text-emerald-800" data-i18n="hero_tag_1">✓ 1.2M tokens processados</span>
+                    <span class="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-blue-100/70 text-blue-800" data-i18n="hero_tag_2">✓ Script de migração gerado</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Metrics Ribbon -->
+    <section class="border-y border-google-border/70 bg-white py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div class="p-3">
+            <div class="text-3xl sm:text-4xl font-extrabold gemini-gradient-text tracking-tight">2M</div>
+            <div class="text-sm font-semibold text-google-dark mt-1" data-i18n="stat_tokens">Tokens de Contexto</div>
+            <div class="text-xs text-google-muted" data-i18n="stat_tokens_sub">A maior capacidade do mercado</div>
+          </div>
+          <div class="p-3">
+            <div class="text-3xl sm:text-4xl font-extrabold text-google-blue tracking-tight">100+</div>
+            <div class="text-sm font-semibold text-google-dark mt-1" data-i18n="stat_languages">Linguagens Suportadas</div>
+            <div class="text-xs text-google-muted" data-i18n="stat_languages_sub">Programação & idiomas nativos</div>
+          </div>
+          <div class="p-3">
+            <div class="text-3xl sm:text-4xl font-extrabold text-purple-600 tracking-tight">3x</div>
+            <div class="text-sm font-semibold text-google-dark mt-1" data-i18n="stat_speed">Velocidade de Geração</div>
+            <div class="text-xs text-google-muted" data-i18n="stat_speed_sub">Latência ultraotimizada</div>
+          </div>
+          <div class="p-3">
+            <div class="text-3xl sm:text-4xl font-extrabold text-emerald-600 tracking-tight">SOC 2/3</div>
+            <div class="text-sm font-semibold text-google-dark mt-1" data-i18n="stat_security">Segurança Google Cloud</div>
+            <div class="text-xs text-google-muted" data-i18n="stat_security_sub">Privacidade e dados blindados</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features & Benefits: Google One Card Style -->
+    <section id="beneficios" class="py-20 md:py-28 bg-google-grayBg">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-google-blue" data-i18n="features_tag">Vantagens Exclusivas</h2>
+          <p class="mt-2 text-3xl sm:text-5xl font-bold tracking-tight text-google-dark" data-i18n="features_title">Projetado para superar limites humanos</p>
+          <p class="mt-4 text-base sm:text-lg text-google-muted" data-i18n="features_subtitle">Descubra os pilares tecnológicos que tornam o Gemini Pro a ferramenta de inteligência artificial definitiva.</p>
+        </div>
+
+        <!-- 6 Cards Grid (Google One Card Design) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          
+          <!-- Card 1: Context Window -->
+          <div class="reveal-on-scroll bg-white rounded-3xl p-8 border border-google-border/80 shadow-sm hover:shadow-google-hover transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-blue-50 text-google-blue flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+              </div>
+              <h3 class="text-xl font-bold text-google-dark" data-i18n="feat_1_title">Janela de 2 Milhões de Tokens</h3>
+              <p class="mt-3 text-sm text-google-muted leading-relaxed" data-i18n="feat_1_desc">
+                Carregue manuais de 1.500 páginas, dezenas de episódios de podcast ou bibliotecas inteiras de software em uma única consulta sem perder um único detalhe.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-100 flex items-center text-xs font-semibold text-google-blue">
+              <span data-i18n="feat_learn_more">Capacidade Incomparável</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Multimodal Reasoning -->
+          <div class="reveal-on-scroll bg-white rounded-3xl p-8 border border-google-border/80 shadow-sm hover:shadow-google-hover transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              </div>
+              <h3 class="text-xl font-bold text-google-dark" data-i18n="feat_2_title">Raciocínio Multimodal Nativo</h3>
+              <p class="mt-3 text-sm text-google-muted leading-relaxed" data-i18n="feat_2_desc">
+                Construído do zero para enxergar, ouvir e compreender textos, imagens em alta resolução, fluxos de áudio e trechos de vídeo sem compressão prejudicial.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-100 flex items-center text-xs font-semibold text-purple-600">
+              <span data-i18n="feat_2_badge">Visão, Áudio & Vídeo</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Senior Software Engineering -->
+          <div class="reveal-on-scroll bg-white rounded-3xl p-8 border border-google-border/80 shadow-sm hover:shadow-google-hover transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              </div>
+              <h3 class="text-xl font-bold text-google-dark" data-i18n="feat_3_title">Engenharia de Código Sênior</h3>
+              <p class="mt-3 text-sm text-google-muted leading-relaxed" data-i18n="feat_3_desc">
+                Refatore códigos legados complexos, crie testes unitários automatizados e depure falhas de concorrência e memória com precisão cirúrgica.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-100 flex items-center text-xs font-semibold text-pink-600">
+              <span data-i18n="feat_3_badge">Python, TS, Go, Rust & C++</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Google Workspace Integration -->
+          <div class="reveal-on-scroll bg-white rounded-3xl p-8 border border-google-border/80 shadow-sm hover:shadow-google-hover transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+              </div>
+              <h3 class="text-xl font-bold text-google-dark" data-i18n="feat_4_title">Integração Google Workspace</h3>
+              <p class="mt-3 text-sm text-google-muted leading-relaxed" data-i18n="feat_4_desc">
+                Crie apresentações no Google Slides, resuma cadeias de e-mails no Gmail e analise planilhas gigantes no Google Sheets com automação por comandos simples.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-100 flex items-center text-xs font-semibold text-amber-600">
+              <span data-i18n="feat_4_badge">Docs, Gmail & Drive Conectados</span>
+            </div>
+          </div>
+
+          <!-- Card 5: Priority Access & High Limits -->
+          <div class="reveal-on-scroll bg-white rounded-3xl p-8 border border-google-border/80 shadow-sm hover:shadow-google-hover transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              </div>
+              <h3 class="text-xl font-bold text-google-dark" data-i18n="feat_5_title">Acesso Prioritário Sem Filas</h3>
+              <p class="mt-3 text-sm text-google-muted leading-relaxed" data-i18n="feat_5_desc">
+                Zero tempo de espera em horários de pico. Obtenha limites de taxa substancialmente maiores e seja o primeiro a testar novidades experimentais dos laboratórios Google.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-100 flex items-center text-xs font-semibold text-emerald-600">
+              <span data-i18n="feat_5_badge">Disponibilidade 99.9%</span>
+            </div>
+          </div>
+
+          <!-- Card 6: Enterprise Data Privacy -->
+          <div class="reveal-on-scroll bg-white rounded-3xl p-8 border border-google-border/80 shadow-sm hover:shadow-google-hover transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+              <h3 class="text-xl font-bold text-google-dark" data-i18n="feat_6_title">Privacidade Empresarial Blindada</h3>
+              <p class="mt-3 text-sm text-google-muted leading-relaxed" data-i18n="feat_6_desc">
+                Seus arquivos, códigos e prompts proprietários nunca são utilizados para treinamento de modelos públicos da Google. Criptografia em trânsito e em repouso.
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-100 flex items-center text-xs font-semibold text-cyan-600">
+              <span data-i18n="feat_6_badge">Conformidade ISO & LGPD</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Interactive Demo Sandbox Section -->
+    <section id="interativo" class="py-20 md:py-24 bg-white border-y border-google-border/70">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-purple-600" data-i18n="demo_tag">Demonstração Interativa</span>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-google-dark" data-i18n="demo_title">Experimente o poder de raciocínio do Gemini Pro</h2>
+          <p class="mt-3 text-google-muted text-sm sm:text-base" data-i18n="demo_subtitle">Selecione um caso de uso real e veja como o modelo decompõe problemas e entrega respostas imediatas.</p>
+        </div>
+
+        <!-- Sandbox Container -->
+        <div class="rounded-3xl border border-google-border shadow-google overflow-hidden bg-white">
+          
+          <!-- Sandbox Tabs Bar -->
+          <div class="flex items-center border-b border-google-border bg-gray-50/80 px-4 sm:px-6 overflow-x-auto gap-2">
+            <button onclick="setDemoTab('code')" id="tabCodeBtn" class="py-4 px-4 text-sm font-semibold border-b-2 border-google-blue text-google-blue flex items-center gap-2 whitespace-nowrap transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+              <span data-i18n="demo_tab_code">Refatoração de Código</span>
+            </button>
+            <button onclick="setDemoTab('data')" id="tabDataBtn" class="py-4 px-4 text-sm font-medium border-b-2 border-transparent text-google-muted hover:text-google-dark flex items-center gap-2 whitespace-nowrap transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+              <span data-i18n="demo_tab_data">Análise Financeira Massiva</span>
+            </button>
+            <button onclick="setDemoTab('creative')" id="tabCreativeBtn" class="py-4 px-4 text-sm font-medium border-b-2 border-transparent text-google-muted hover:text-google-dark flex items-center gap-2 whitespace-nowrap transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+              <span data-i18n="demo_tab_creative">Síntese Estratégica Executiva</span>
+            </button>
+          </div>
+
+          <!-- Sandbox Content Area -->
+          <div class="p-6 sm:p-8 space-y-6">
+            
+            <!-- Context / User prompt input mock -->
+            <div>
+              <label class="text-xs font-bold text-google-muted uppercase tracking-wider block mb-2" data-i18n="demo_input_label">Arquivo & Comando Enviado</label>
+              <div id="demoPromptContent" class="p-4 rounded-2xl bg-google-grayBg border border-google-border/70 text-sm font-medium text-google-dark flex items-start gap-3">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Gemini Response Stream Box -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label class="text-xs font-bold text-purple-700 uppercase tracking-wider flex items-center gap-1.5">
+                  <svg class="w-3.5 h-3.5 animate-spin text-purple-600" id="demoSpinIcon" style="display:none;" viewBox="0 0 24 24" fill="none">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                  </svg>
+                  <span data-i18n="demo_response_label">Processamento Gemini Pro</span>
+                </label>
+                <button onclick="replayCurrentDemo()" class="text-xs font-semibold text-google-blue hover:text-google-blueDark flex items-center gap-1">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                  <span data-i18n="demo_btn_replay">Executar Novamente</span>
+                </button>
+              </div>
+
+              <div id="demoOutputBox" class="p-5 rounded-2xl bg-[#1e1e24] text-gray-100 font-mono text-xs sm:text-sm min-h-[160px] leading-relaxed shadow-inner overflow-x-auto whitespace-pre-wrap">
+                <!-- Live output injected -->
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Plan Comparison Section: Free vs Pro -->
+    <section id="comparativo" class="py-20 bg-google-grayBg">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <h2 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-google-blue" data-i18n="comp_tag">Comparativo de Versões</h2>
+          <p class="mt-2 text-3xl sm:text-4xl font-bold text-google-dark" data-i18n="comp_title">Por que fazer o upgrade para o Gemini Pro?</p>
+          <p class="mt-3 text-google-muted text-sm sm:text-base" data-i18n="comp_subtitle">Entenda as diferenças arquiteturais entre a versão pública e o modelo profissional.</p>
+        </div>
+
+        <div class="bg-white rounded-3xl border border-google-border/90 shadow-sm overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-google-border bg-gray-50/60">
+                  <th class="py-4 px-6 text-sm font-bold text-google-dark" data-i18n="comp_col_feature">Recurso & Capacidade</th>
+                  <th class="py-4 px-6 text-sm font-bold text-google-muted w-1/4" data-i18n="comp_col_free">Gemini Standard (Gratuito)</th>
+                  <th class="py-4 px-6 text-sm font-bold text-google-blue bg-blue-50/50 w-1/3" data-i18n="comp_col_pro">Gemini Pro (Completo)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-google-border/60 text-sm">
+                <!-- Row 1 -->
+                <tr>
+                  <td class="py-4 px-6 font-semibold text-google-dark" data-i18n="comp_row1_title">Janela de Contexto</td>
+                  <td class="py-4 px-6 text-google-muted" data-i18n="comp_row1_free">Até 32.000 tokens (~40 páginas)</td>
+                  <td class="py-4 px-6 font-semibold text-google-blue bg-blue-50/30" data-i18n="comp_row1_pro">Até 2.000.000 tokens (~2.500 páginas)</td>
+                </tr>
+                <!-- Row 2 -->
+                <tr>
+                  <td class="py-4 px-6 font-semibold text-google-dark" data-i18n="comp_row2_title">Raciocínio Multimodal em Vídeo</td>
+                  <td class="py-4 px-6 text-google-muted" data-i18n="comp_row2_free">Clipes curtos (até 2 min)</td>
+                  <td class="py-4 px-6 font-semibold text-google-blue bg-blue-50/30" data-i18n="comp_row2_pro">Horas completas de gravação em 4K</td>
+                </tr>
+                <!-- Row 3 -->
+                <tr>
+                  <td class="py-4 px-6 font-semibold text-google-dark" data-i18n="comp_row3_title">Execução & Depuração de Código</td>
+                  <td class="py-4 px-6 text-google-muted" data-i18n="comp_row3_free">Snippets básicos com limites diários</td>
+                  <td class="py-4 px-6 font-semibold text-google-blue bg-blue-50/30" data-i18n="comp_row3_pro">Engenharia sênior em repositórios completos</td>
+                </tr>
+                <!-- Row 4 -->
+                <tr>
+                  <td class="py-4 px-6 font-semibold text-google-dark" data-i18n="comp_row4_title">Integração Google Workspace</td>
+                  <td class="py-4 px-6 text-google-muted" data-i18n="comp_row4_free">Não incluído</td>
+                  <td class="py-4 px-6 font-semibold text-google-blue bg-blue-50/30" data-i18n="comp_row4_pro">Direto no Docs, Gmail, Sheets e Slides</td>
+                </tr>
+                <!-- Row 5 -->
+                <tr>
+                  <td class="py-4 px-6 font-semibold text-google-dark" data-i18n="comp_row5_title">Armazenamento em Nuvem Google One</td>
+                  <td class="py-4 px-6 text-google-muted" data-i18n="comp_row5_free">15 GB padrão gratuito</td>
+                  <td class="py-4 px-6 font-semibold text-google-blue bg-blue-50/30" data-i18n="comp_row5_pro">2 TB (2.000 GB) de espaço incluído</td>
+                </tr>
+                <!-- Row 6 -->
+                <tr>
+                  <td class="py-4 px-6 font-semibold text-google-dark" data-i18n="comp_row6_title">Treinamento de Dados</td>
+                  <td class="py-4 px-6 text-google-muted" data-i18n="comp_row6_free">Revisão por amostragem padrão</td>
+                  <td class="py-4 px-6 font-semibold text-emerald-700 bg-blue-50/30" data-i18n="comp_row6_pro">100% Privado — Zero treino nos seus dados</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Pricing Section (Google One Premium Highlight) -->
+    <section id="planos" class="py-20 md:py-28 bg-white relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-google-blue text-xs font-semibold mb-3">
+            <span data-i18n="pricing_badge">Assinatura Google One AI Premium</span>
+          </div>
+          <h2 class="text-3xl sm:text-5xl font-extrabold text-google-dark tracking-tight" data-i18n="pricing_title">Investimento transparente e flexível</h2>
+          <p class="mt-4 text-base sm:text-lg text-google-muted" data-i18n="pricing_subtitle">Ativação instantânea com recursos premium. Cancele com um toque no seu painel Google.</p>
+          
+          <!-- Billing Cycle Selector (Monthly / Annual) -->
+          <div class="mt-8 inline-flex items-center p-1 bg-google-grayBg rounded-full border border-google-border">
+            <button onclick="setBillingCycle('monthly')" id="billMonthlyBtn" class="px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-google-dark shadow-sm">
+              <span data-i18n="billing_monthly">Cobrança Mensal</span>
+            </button>
+            <button onclick="setBillingCycle('annual')" id="billAnnualBtn" class="px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all text-google-muted hover:text-google-dark flex items-center gap-1.5">
+              <span data-i18n="billing_annual">Cobrança Anual</span>
+              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full" data-i18n="billing_discount">ECONOMIZE 15%</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Pricing Cards Container -->
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+          
+          <!-- Free / Standard Plan Card -->
+          <div class="rounded-3xl p-8 bg-google-grayBg border border-google-border flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-bold text-google-dark" data-i18n="card_free_title">Gemini Básico</h3>
+                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-gray-200 text-gray-700" data-i18n="card_free_badge">Para todos</span>
+              </div>
+              <p class="text-sm text-google-muted mb-6" data-i18n="card_free_desc">Para pesquisas do dia a dia, redação simples e perguntas gerais.</p>
+              
+              <div class="mb-6">
+                <span class="text-4xl font-extrabold text-google-dark">R$ 0</span>
+                <span class="text-google-muted text-sm" data-i18n="card_free_period"> / sempre grátis</span>
+              </div>
+
+              <ul class="space-y-3.5 text-sm text-gray-700">
+                <li class="flex items-start gap-2.5">
+                  <svg class="w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  <span data-i18n="card_free_item1">Modelo padrão Gemini Flash</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <svg class="w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  <span data-i18n="card_free_item2">Janela de contexto padrão (32k tokens)</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <svg class="w-5 h-5 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  <span data-i18n="card_free_item3">15 GB de armazenamento Google compartilhado</span>
+                </li>
+                <li class="flex items-start gap-2.5 text-gray-400">
+                  <svg class="w-5 h-5 text-gray-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                  <span data-i18n="card_free_item4">Sem IA no Google Workspace</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-8">
+              <button onclick="triggerAction('free')" class="w-full py-3.5 px-4 rounded-full text-sm font-semibold text-google-dark bg-white border border-google-border hover:bg-gray-100 transition-colors" data-i18n="card_free_cta">
+                Usar Versão Gratuita
+              </button>
+            </div>
+          </div>
+
+          <!-- Gemini Pro Highlight Card (Google One Premium Gradient Border) -->
+          <div class="relative rounded-3xl p-8 bg-white border-2 border-transparent gemini-border-glow shadow-google-hover flex flex-col justify-between group">
+            
+            <!-- Top Pro Badge -->
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full gemini-gradient-bg text-white text-xs font-bold shadow-md tracking-wide flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none">
+                <path d="M12 0C12 6.627 6.627 12 0 12C6.627 12 12 17.373 12 24C12 17.373 17.373 12 24 12C17.373 12 12 6.627 12 0Z" fill="white"/>
+              </svg>
+              <span data-i18n="card_pro_pill">RECOMENDADO PELO GOOGLE</span>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between mb-4 mt-2">
+                <h3 class="text-2xl font-extrabold text-google-dark">Gemini Pro</h3>
+                <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-100 text-google-blue" data-i18n="card_pro_ai_badge">IA Avançada</span>
+              </div>
+              <p class="text-sm text-google-muted mb-6" data-i18n="card_pro_desc">Para desenvolvedores, pesquisadores, executivos e criadores que exigem o máximo.</p>
+              
+              <!-- Dynamic Price Display -->
+              <div class="mb-2">
+                <div class="flex items-baseline gap-2">
+                  <span id="priceDisplay" class="text-4xl sm:text-5xl font-extrabold text-google-dark">R$ 94,90</span>
+                  <span id="periodDisplay" class="text-google-muted text-sm font-medium"> / mês</span>
+                </div>
+                <div id="subPriceDisplay" class="text-xs text-emerald-600 font-semibold mt-1">
+                  Pagamento via Pix instantâneo • Liberação imediata
+                </div>
+              </div>
+
+              <!-- Feature checklist -->
+              <ul class="space-y-3.5 text-sm text-google-dark mt-6">
+                <li class="flex items-start gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-blue-100 text-google-blue flex items-center justify-center shrink-0 mt-0.5">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                  </div>
+                  <span class="font-medium" data-i18n="card_pro_item1">Janela de contexto expansiva de até 2M tokens</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-blue-100 text-google-blue flex items-center justify-center shrink-0 mt-0.5">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                  </div>
+                  <span class="font-medium" data-i18n="card_pro_item2">Integração nativa no Gmail, Docs, Sheets e Slides</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-blue-100 text-google-blue flex items-center justify-center shrink-0 mt-0.5">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                  </div>
+                  <span class="font-medium" data-i18n="card_pro_item3">2 TB (2.000 GB) de armazenamento em nuvem Google One</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-blue-100 text-google-blue flex items-center justify-center shrink-0 mt-0.5">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                  </div>
+                  <span class="font-medium" data-i18n="card_pro_item4">Acesso prioritário a novos modelos de raciocínio</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <div class="w-5 h-5 rounded-full bg-blue-100 text-google-blue flex items-center justify-center shrink-0 mt-0.5">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                  </div>
+                  <span class="font-medium" data-i18n="card_pro_item5">Compartilhamento familiar em até 5 contas</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-8 space-y-2">
+              <button onclick="handleCheckout()" class="w-full py-3.5 px-4 rounded-full text-base font-semibold text-white bg-google-blue hover:bg-google-blueDark transition-all duration-200 shadow-google hover:shadow-google-hover flex items-center justify-center gap-2">
+                <span data-i18n="card_pro_cta">Assinar Gemini Pro</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+              <p class="text-center text-[11px] text-google-muted" data-i18n="card_pro_cancel_notice">Assinatura mensal flexível. Cancele quando quiser sem fidelidade.</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FAQ Accordion Section -->
+    <section id="faq" class="py-20 bg-google-grayBg border-t border-google-border/70">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-14">
+          <h2 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-google-blue" data-i18n="faq_tag">Perguntas Frequentes</h2>
+          <p class="mt-2 text-3xl sm:text-4xl font-bold text-google-dark" data-i18n="faq_title">Tire suas dúvidas sobre o Gemini Pro</p>
+          <p class="mt-3 text-google-muted text-sm sm:text-base" data-i18n="faq_subtitle">Tudo o que você precisa saber sobre faturamento, recursos e segurança.</p>
+        </div>
+
+        <div class="space-y-4" id="faqAccordion">
+          
+          <!-- Item 1 -->
+          <div class="bg-white rounded-2xl border border-google-border overflow-hidden transition-all">
+            <button onclick="toggleFaq(1)" class="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 focus:outline-none">
+              <span class="font-bold text-google-dark text-base sm:text-lg" data-i18n="faq_q1">Como funciona a assinatura e liberação do acesso?</span>
+              <svg id="faqIcon-1" class="w-5 h-5 text-google-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="faqAnswer-1" class="px-5 sm:px-6 pb-6 text-sm text-google-muted leading-relaxed hidden">
+              <span data-i18n="faq_a1">Após a confirmação do pagamento, seu acesso a todas as funcionalidades do Gemini Pro e aos 2 TB de armazenamento do Google One é liberado instantaneamente na sua conta. Você pode gerenciar ou cancelar a renovação quando quiser.</span>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="bg-white rounded-2xl border border-google-border overflow-hidden transition-all">
+            <button onclick="toggleFaq(2)" class="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 focus:outline-none">
+              <span class="font-bold text-google-dark text-base sm:text-lg" data-i18n="faq_q2">O que significa ter uma janela de contexto de 2 milhões de tokens?</span>
+              <svg id="faqIcon-2" class="w-5 h-5 text-google-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="faqAnswer-2" class="px-5 sm:px-6 pb-6 text-sm text-google-muted leading-relaxed hidden">
+              <span data-i18n="faq_a2">A janela de contexto define o volume de informação que a IA consegue processar simultaneamente na memória de trabalho. Com 2 milhões de tokens, você pode enviar cerca de 1,4 milhão de palavras, 1 hora de vídeo ou dezenas de milhares de linhas de código em uma única requisição.</span>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="bg-white rounded-2xl border border-google-border overflow-hidden transition-all">
+            <button onclick="toggleFaq(3)" class="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 focus:outline-none">
+              <span class="font-bold text-google-dark text-base sm:text-lg" data-i18n="faq_q3">Meus dados pessoais ou de trabalho são usados para treinar a IA?</span>
+              <svg id="faqIcon-3" class="w-5 h-5 text-google-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="faqAnswer-3" class="px-5 sm:px-6 pb-6 text-sm text-google-muted leading-relaxed hidden">
+              <span data-i18n="faq_a3">Não. No Gemini Pro associado ao Google One AI Premium, seus arquivos privados do Drive, prompts e respostas não são utilizados para treinar os modelos fundacionais da Google nem são revisados por humanos sem sua permissão explícita.</span>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="bg-white rounded-2xl border border-google-border overflow-hidden transition-all">
+            <button onclick="toggleFaq(4)" class="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 focus:outline-none">
+              <span class="font-bold text-google-dark text-base sm:text-lg" data-i18n="faq_q4">Posso compartilhar os benefícios com meus familiares?</span>
+              <svg id="faqIcon-4" class="w-5 h-5 text-google-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="faqAnswer-4" class="px-5 sm:px-6 pb-6 text-sm text-google-muted leading-relaxed hidden">
+              <span data-i18n="faq_a4">Sim! O plano inclui compartilhamento familiar do Google One com até 5 pessoas adicionais, dividindo o espaço total de armazenamento de 2 TB com total privacidade de dados individuais.</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Bottom Call-to-Action Card -->
+    <section class="py-16 md:py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative rounded-3xl p-8 sm:p-14 overflow-hidden text-center bg-gradient-to-r from-blue-900 via-indigo-950 to-purple-900 text-white shadow-2xl">
+          
+          <!-- Decorative Glow circles -->
+          <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-blue-500/20 blur-3xl pointer-events-none"></div>
+          <div class="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-pink-500/20 blur-3xl pointer-events-none"></div>
+
+          <div class="relative z-10 max-w-2xl mx-auto space-y-6">
+            <div class="w-12 h-12 mx-auto rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center">
+              <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none">
+                <path d="M12 0C12 6.627 6.627 12 0 12C6.627 12 12 17.373 12 24C12 17.373 17.373 12 24 12C17.373 12 12 6.627 12 0Z" fill="white"/>
+              </svg>
+            </div>
+            
+            <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight" data-i18n="bottom_cta_title">Pronto para transformar sua produtividade?</h2>
+            <p class="text-blue-100/90 text-sm sm:text-base" data-i18n="bottom_cta_subtitle">Junte-se a milhões de profissionais e empresas que utilizam a inteligência artificial mais avançada da Google.</p>
+            
+            <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button onclick="handleCheckout()" class="w-full sm:w-auto px-8 py-4 rounded-full text-base font-bold text-google-dark bg-white hover:bg-gray-100 transition-all shadow-lg hover:scale-105">
+                <span data-i18n="bottom_cta_btn">Assinar Gemini Pro Agora</span>
+              </button>
+            </div>
+
+            <div class="text-xs text-blue-200/80" data-i18n="bottom_cta_terms">
+              Disponível em mais de 150 países • Suporte oficial Google 24/7
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Google One Style Clean Footer -->
+  <footer class="bg-google-grayBg border-t border-google-border py-12 text-sm text-google-muted">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Disclaimer de Não Afiliação no Rodapé (Ad Compliance & Enterprise Style) -->
+      <div class="mb-8 p-4 sm:p-5 rounded-2xl bg-white border border-google-border shadow-xs flex items-start gap-3.5 text-xs text-google-muted leading-relaxed">
+        <div class="w-6 h-6 rounded-lg bg-gray-100 flex items-center justify-center shrink-0 text-google-muted mt-0.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <p data-i18n="footer_legal_notice">
+          <strong class="text-google-dark font-semibold">Aviso Legal:</strong> Esta plataforma e suas ferramentas são independentes e não possuem afiliação, endosso ou vínculo oficial com a Google LLC, Google One ou Gemini.
+        </p>
+      </div>
+
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-google-border/70">
+        <div class="flex items-center gap-2">
+          <span class="text-xl font-bold text-google-dark">Google</span>
+          <span class="text-xs font-semibold px-2 py-0.5 rounded bg-gray-200 text-gray-700">One</span>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-6 text-xs sm:text-sm">
+          <button type="button" onclick="openInstitutionalModal('terms')" class="hover:text-google-dark transition-colors focus:outline-none cursor-pointer" data-i18n="footer_terms">Termos de Serviço</button>
+          <button type="button" onclick="openInstitutionalModal('privacy')" class="hover:text-google-dark transition-colors focus:outline-none cursor-pointer" data-i18n="footer_privacy">Política de Privacidade</button>
+          <button type="button" onclick="openInstitutionalModal('payments')" class="hover:text-google-dark transition-colors focus:outline-none cursor-pointer" data-i18n="footer_payments">Política de Entrega e Pagamentos Cripto/Pix</button>
+        </div>
+
+        <!-- Language indicator in footer -->
+        <div class="flex items-center gap-2 text-xs font-medium bg-white px-3 py-1.5 rounded-lg border border-google-border">
+          <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/></svg>
+          <span id="footerLangLabel">Português (Brasil) — BRL</span>
+        </div>
+      </div>
+
+      <div class="pt-8 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+        <p>© 2026 Google LLC. Gemini, Google One e logotipos relacionados são marcas comerciais da Google LLC.</p>
+        <p data-i18n="footer_disclaimer">Preços e termos promocionais sujeitos à disponibilidade por região.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Modal de Confirmação Pré-Checkout (Ad Compliance & Proteção Contratual) -->
+  <div id="checkoutConfirmModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-google-border transform scale-95 transition-transform duration-300 flex flex-col gap-5" id="checkoutConfirmCard">
+      
+      <div class="flex items-center gap-3.5">
+        <div class="w-12 h-12 rounded-2xl bg-blue-50 text-google-blue flex items-center justify-center shrink-0">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-google-dark" id="checkoutConfirmTitle">Confirmação Pré-Checkout</h3>
+          <p class="text-xs text-google-muted mt-0.5" id="checkoutConfirmSubtitle">Ambiente seguro com liquidação e ativação instantânea</p>
+        </div>
+      </div>
+
+      <!-- Plan & Price Badge -->
+      <div class="p-3.5 rounded-2xl bg-google-grayBg border border-google-border/80 flex items-center justify-between text-xs sm:text-sm">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="font-bold text-google-dark">Gemini Pro</span>
+          <span class="text-google-muted font-normal" id="checkoutConfirmBillingLabel">(Mensal — Pix Seguro)</span>
+        </div>
+        <div class="font-extrabold text-google-dark text-base sm:text-lg" id="checkoutConfirmPriceLabel">
+          R$ 94,90
+        </div>
+      </div>
+
+      <!-- Notice box -->
+      <div class="text-xs text-gray-600 bg-amber-50/70 border border-amber-200/80 rounded-2xl p-3.5 leading-relaxed flex items-start gap-2.5">
+        <svg class="w-4 h-4 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+        </svg>
+        <span id="checkoutConfirmNoticeText">
+          Os recursos e credenciais computacionais são provisionados imediatamente após a liquidação do pagamento.
+        </span>
+      </div>
+
+      <!-- Mandatory Checkbox -->
+      <div class="p-3.5 rounded-2xl border-2 transition-all border-gray-200 hover:border-google-blue/40 bg-white" id="checkoutCheckboxContainer">
+        <label class="flex items-start gap-3 cursor-pointer select-none text-xs sm:text-sm leading-relaxed text-google-dark">
+          <input type="checkbox" id="checkoutConsentCheckbox" onchange="onCheckoutConsentChange()" class="mt-1 w-4 h-4 rounded text-google-blue border-gray-300 focus:ring-google-blue focus:ring-2 cursor-pointer shrink-0">
+          <span id="checkoutConsentLabel" class="font-medium text-gray-700">
+            Estou ciente de que o acesso é liberado de forma imediata e definitiva, e que pagamentos via Pix com liquidação em criptoativos ou via carteira Web3 não possuem estorno unilateral.
+          </span>
+        </label>
+      </div>
+      <p id="checkoutConsentError" class="text-xs text-rose-600 font-medium hidden flex items-center gap-1.5 -mt-3">
+        <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span id="checkoutConsentErrorText">Você precisa marcar a caixa de consentimento acima para prosseguir.</span>
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-end gap-3 pt-2">
+        <button type="button" onclick="closeCheckoutConfirmModal()" class="w-full sm:w-auto px-5 py-2.5 rounded-full text-sm font-semibold text-google-dark bg-gray-100 hover:bg-gray-200 transition-colors order-2 sm:order-1" id="checkoutCancelBtn">
+          Cancelar
+        </button>
+        <button type="button" onclick="proceedToFinalCheckout()" class="w-full sm:w-auto px-6 py-2.5 rounded-full text-sm font-semibold text-white bg-google-blue hover:bg-google-blueDark transition-all shadow order-1 sm:order-2 flex items-center justify-center gap-2 group cursor-pointer" id="btnProceedCheckout">
+          <span id="btnProceedCheckoutText">Continuar para Pagamento Seguro</span>
+          <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal Institucional (Termos de Serviço, Política de Privacidade, Entrega e Pagamentos) -->
+  <div id="institutionalModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-google-border transform scale-95 transition-transform duration-300" id="institutionalModalCard">
+      <!-- Modal Header -->
+      <div class="px-6 sm:px-8 py-5 border-b border-google-border flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-blue-50 text-google-blue flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg sm:text-xl font-bold text-google-dark" id="institutionalModalTitle">Informações Institucionais</h3>
+        </div>
+        <button type="button" onclick="closeInstitutionalModal()" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 text-google-muted hover:text-google-dark flex items-center justify-center transition-colors cursor-pointer" aria-label="Fechar">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="px-6 sm:px-8 py-6 overflow-y-auto space-y-4 text-sm text-google-dark leading-relaxed" id="institutionalModalBody">
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 sm:px-8 py-4 bg-google-grayBg border-t border-google-border rounded-b-3xl flex justify-end">
+        <button type="button" onclick="closeInstitutionalModal()" class="px-6 py-2.5 rounded-full text-sm font-semibold text-white bg-google-blue hover:bg-google-blueDark transition-colors shadow cursor-pointer">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Non-intrusive Toast / Modal Notification (No alert() used) -->
+  <div id="actionModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full mx-4 shadow-2xl border border-google-border transform scale-95 transition-transform duration-300" id="modalCard">
+      <div class="w-12 h-12 rounded-2xl bg-blue-50 text-google-blue flex items-center justify-center mb-4">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none">
+          <path d="M12 0C12 6.627 6.627 12 0 12C6.627 12 12 17.373 12 24C12 17.373 17.373 12 24 12C17.373 12 12 6.627 12 0Z" fill="#1a73e8"/>
+        </svg>
+      </div>
+      <h3 class="text-xl font-bold text-google-dark" id="modalTitle">Ativação do Gemini Pro</h3>
+      <p class="mt-2 text-sm text-google-muted leading-relaxed" id="modalDesc">
+        Você está sendo redirecionado para a autenticação segura da sua Conta Google.
+      </p>
+      
+      <div class="mt-6 flex justify-end gap-3">
+        <button id="modalCloseBtn" onclick="closeModal()" class="px-5 py-2.5 rounded-full text-sm font-semibold text-google-dark bg-gray-100 hover:bg-gray-200 transition-colors">
+          Fechar
+        </button>
+        <button id="modalConfirmBtn" onclick="closeModal()" class="px-6 py-2.5 rounded-full text-sm font-semibold text-white bg-google-blue hover:bg-google-blueDark transition-colors shadow">
+          Continuar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /**
+     * CONFIGURAÇÃO CENTRALIZADA DE CHECKOUT (CHECKOUT_CONFIG)
+     * Defina as URLs de redirecionamento para cada idioma / moeda.
+     * Placeholders fáceis de substituir por links de produção:
+     * - pt: Gateway Pix-to-Crypto (Brasil - R$ 94,90) -> ex: https://pay.hodle.com.br/checkout-demo
+     * - en: Gateway Internacional Crypto / Card ($40) -> ex: https://helio.co/pay/checkout-demo
+     */
+    const CHECKOUT_CONFIG = {
+      // Gateway Pix-to-Crypto (Brasil - R$ 94,90)
+      pt: 'https://pay.hodle.com.br/checkout-demo',
+
+      // Gateway Internacional Crypto / Card ($40)
+      en: 'https://helio.co/pay/checkout-demo'
+    };
+
+    // State Management
+    let currentLang = 'pt';
+    let currentBilling = 'monthly';
+    let currentTab = 'code';
+
+    // Internationalization Dictionary (PT-BR vs EN)
+    const i18nData = {
+      pt: {
+        nav_features: "Recursos",
+        nav_demo: "Demonstração",
+        nav_compare: "Comparativo",
+        nav_pricing: "Planos",
+        nav_faq: "Dúvidas",
+        nav_cta: "Assinar Agora",
+        hero_pill: "Nova Era de Inteligência Artificial Google",
+        hero_title_p1: "Eleve seu potencial com o",
+        hero_title_gradient: "Gemini Pro",
+        hero_subtitle: "Nossa inteligência multimodal mais refinada. Acesse uma janela de contexto massiva de até 2 milhões de tokens, raciocínio computacional sênior e integração perfeita ao ecossistema Google.",
+        hero_primary_cta: "Assinar Gemini Pro",
+        hero_secondary_cta: "Ver planos e valores",
+        hero_guarantee: "Acesso imediato • Cancele online a qualquer momento com 1 clique",
+        hero_card_status: "Ultra Conexão Ativa",
+        hero_loaded_title: "Entrada Multimodal Ativa",
+        hero_prompt_label: "Seu comando:",
+        hero_prompt_text: '"Cruze os dados da página 412 do PDF com a decisão em 01:14:20 do vídeo e avalie o impacto no repositório de infraestrutura."',
+        hero_gemini_thinking: "Gemini Pro • Resposta Multimodal em 0.8s",
+        hero_response_1: "<strong>1. Correlação Instantânea:</strong> A meta de redução de latência descrita na pág. 412 do relatório (alvo < 45ms) alinha-se com a diretiva do CTO no minuto 01:14:20 da gravação.",
+        hero_response_2: "<strong>2. Diagnóstico no Código:</strong> Identifiquei que os arquivos <code class='font-mono bg-gray-100 px-1 py-0.5 rounded text-purple-700'>ingress_controller.rs</code> e <code class='font-mono bg-gray-100 px-1 py-0.5 rounded text-purple-700'>mesh_config.yaml</code> contêm buffers estáticos de 120ms que precisam ser substituídos pelo adaptador assíncrono.",
+        hero_tag_1: "✓ 1.2M tokens processados",
+        hero_tag_2: "✓ Script de migração gerado",
+        stat_tokens: "Tokens de Contexto",
+        stat_tokens_sub: "A maior capacidade do mercado",
+        stat_languages: "Linguagens Suportadas",
+        stat_languages_sub: "Programação & idiomas nativos",
+        stat_speed: "Velocidade de Geração",
+        stat_speed_sub: "Latência ultraotimizada",
+        stat_security: "Segurança Google Cloud",
+        stat_security_sub: "Privacidade e dados blindados",
+        features_tag: "Vantagens Exclusivas",
+        features_title: "Projetado para superar limites humanos",
+        features_subtitle: "Descubra os pilares tecnológicos que tornam o Gemini Pro a ferramenta de inteligência artificial definitiva.",
+        feat_1_title: "Janela de 2 Milhões de Tokens",
+        feat_1_desc: "Carregue manuais de 1.500 páginas, dezenas de episódios de podcast ou bibliotecas inteiras de software em uma única consulta sem perder um único detalhe.",
+        feat_learn_more: "Capacidade Incomparável",
+        feat_2_title: "Raciocínio Multimodal Nativo",
+        feat_2_desc: "Construído do zero para enxergar, ouvir e compreender textos, imagens em alta resolução, fluxos de áudio e trechos de vídeo sem compressão prejudicial.",
+        feat_2_badge: "Visão, Áudio & Vídeo",
+        feat_3_title: "Engenharia de Código Sênior",
+        feat_3_desc: "Refatore códigos legados complexos, crie testes unitários automatizados e depure falhas de concorrência e memória com precisão cirúrgica.",
+        feat_3_badge: "Python, TS, Go, Rust & C++",
+        feat_4_title: "Integração Google Workspace",
+        feat_4_desc: "Crie apresentações no Google Slides, resuma cadeias de e-mails no Gmail e analise planilhas gigantes no Google Sheets com automação por comandos simples.",
+        feat_4_badge: "Docs, Gmail & Drive Conectados",
+        feat_5_title: "Acesso Prioritário Sem Filas",
+        feat_5_desc: "Zero tempo de espera em horários de pico. Obtenha limites de taxa substancialmente maiores e seja o primeiro a testar novidades experimentais dos laboratórios Google.",
+        feat_5_badge: "Disponibilidade 99.9%",
+        feat_6_title: "Privacidade Empresarial Blindada",
+        feat_6_desc: "Seus arquivos, códigos e prompts proprietários nunca são utilizados para treinamento de modelos públicos da Google. Criptografia em trânsito e em repouso.",
+        feat_6_badge: "Conformidade ISO & LGPD",
+        demo_tag: "Demonstração Interativa",
+        demo_title: "Experimente o poder de raciocínio do Gemini Pro",
+        demo_subtitle: "Selecione um caso de uso real e veja como o modelo decompõe problemas e entrega respostas imediatas.",
+        demo_tab_code: "Refatoração de Código",
+        demo_tab_data: "Análise Financeira Massiva",
+        demo_tab_creative: "Síntese Estratégica Executiva",
+        demo_input_label: "Arquivo & Comando Enviado",
+        demo_response_label: "Processamento Gemini Pro",
+        demo_btn_replay: "Executar Novamente",
+        comp_tag: "Comparativo de Versões",
+        comp_title: "Por que fazer o upgrade para o Gemini Pro?",
+        comp_subtitle: "Entenda as diferenças arquiteturais entre a versão pública e o modelo profissional.",
+        comp_col_feature: "Recurso & Capacidade",
+        comp_col_free: "Gemini Standard (Gratuito)",
+        comp_col_pro: "Gemini Pro (Completo)",
+        comp_row1_title: "Janela de Contexto",
+        comp_row1_free: "Até 32.000 tokens (~40 páginas)",
+        comp_row1_pro: "Até 2.000.000 tokens (~2.500 páginas)",
+        comp_row2_title: "Raciocínio Multimodal em Vídeo",
+        comp_row2_free: "Clipes curtos (até 2 min)",
+        comp_row2_pro: "Horas completas de gravação em 4K",
+        comp_row3_title: "Execução & Depuração de Código",
+        comp_row3_free: "Snippets básicos com limites diários",
+        comp_row3_pro: "Engenharia sênior em repositórios completos",
+        comp_row4_title: "Integração Google Workspace",
+        comp_row4_free: "Não incluído",
+        comp_row4_pro: "Direto no Docs, Gmail, Sheets e Slides",
+        comp_row5_title: "Armazenamento em Nuvem Google One",
+        comp_row5_free: "15 GB padrão gratuito",
+        comp_row5_pro: "2 TB (2.000 GB) de espaço incluído",
+        comp_row6_title: "Treinamento de Dados",
+        comp_row6_free: "Revisão por amostragem padrão",
+        comp_row6_pro: "100% Privado — Zero treino nos seus dados",
+        pricing_badge: "Assinatura Google One AI Premium",
+        pricing_title: "Investimento transparente e flexível",
+        pricing_subtitle: "Ativação instantânea com recursos premium. Cancele com um toque no seu painel Google.",
+        billing_monthly: "Cobrança Mensal",
+        billing_annual: "Cobrança Anual",
+        billing_discount: "ECONOMIZE 15%",
+        card_free_title: "Gemini Básico",
+        card_free_badge: "Para todos",
+        card_free_desc: "Para pesquisas do dia a dia, redação simples e perguntas gerais.",
+        card_free_period: " / sempre grátis",
+        card_free_item1: "Modelo padrão Gemini Flash",
+        card_free_item2: "Janela de contexto padrão (32k tokens)",
+        card_free_item3: "15 GB de armazenamento Google compartilhado",
+        card_free_item4: "Sem IA no Google Workspace",
+        card_free_cta: "Usar Versão Gratuita",
+        card_pro_pill: "RECOMENDADO PELO GOOGLE",
+        card_pro_ai_badge: "IA Avançada",
+        card_pro_desc: "Para desenvolvedores, pesquisadores, executivos e criadores que exigem o máximo.",
+        card_pro_item1: "Janela de contexto expansiva de até 2M tokens",
+        card_pro_item2: "Integração nativa no Gmail, Docs, Sheets e Slides",
+        card_pro_item3: "2 TB (2.000 GB) de armazenamento em nuvem Google One",
+        card_pro_item4: "Acesso prioritário a novos modelos de raciocínio",
+        card_pro_item5: "Compartilhamento familiar em até 5 contas",
+        card_pro_cta: "Assinar Gemini Pro",
+        card_pro_cancel_notice: "Assinatura mensal flexível. Cancele quando quiser sem fidelidade.",
+        faq_tag: "Perguntas Frequentes",
+        faq_title: "Tire suas dúvidas sobre o Gemini Pro",
+        faq_subtitle: "Tudo o que você precisa saber sobre faturamento, recursos e segurança.",
+        faq_q1: "Como funciona a assinatura e liberação do acesso?",
+        faq_a1: "Após a confirmação do pagamento, seu acesso a todas as funcionalidades do Gemini Pro e aos 2 TB de armazenamento do Google One é liberado instantaneamente na sua conta. Você pode gerenciar ou cancelar a renovação quando quiser.",
+        faq_q2: "O que significa ter uma janela de contexto de 2 milhões de tokens?",
+        faq_a2: "A janela de contexto define o volume de informação que a IA consegue processar simultaneamente na memória de trabalho. Com 2 milhões de tokens, você pode enviar cerca de 1,4 milhão de palavras, 1 hora de vídeo ou dezenas de milhares de linhas de código em uma única requisição.",
+        faq_q3: "Meus dados pessoais ou de trabalho são usados para treinar a IA?",
+        faq_a3: "Não. No Gemini Pro associado ao Google One AI Premium, seus arquivos privados do Drive, prompts e respostas não são utilizados para treinar os modelos fundacionais da Google nem são revisados por humanos sem sua permissão explícita.",
+        faq_q4: "Posso compartilhar os benefícios com meus familiares?",
+        faq_a4: "Sim! O plano inclui compartilhamento familiar do Google One com até 5 pessoas adicionais, dividindo o espaço total de armazenamento de 2 TB com total privacidade de dados individuais.",
+        bottom_cta_title: "Pronto para transformar sua produtividade?",
+        bottom_cta_subtitle: "Junte-se a milhões de profissionais e empresas que utilizam a inteligência artificial mais avançada da Google.",
+        bottom_cta_btn: "Assinar Gemini Pro Agora",
+        bottom_cta_terms: "Disponível em mais de 150 países • Suporte oficial Google 24/7",
+        footer_legal_notice: `<strong class="text-google-dark font-semibold">Aviso Legal:</strong> Esta plataforma e suas ferramentas são independentes e não possuem afiliação, endosso ou vínculo oficial com a Google LLC, Google One ou Gemini.`,
+        footer_terms: "Termos de Serviço",
+        footer_privacy: "Política de Privacidade",
+        footer_payments: "Política de Entrega e Pagamentos Cripto/Pix",
+        footer_security: "Segurança Google Cloud",
+        footer_support: "Central de Ajuda",
+        footer_disclaimer: "Preços e termos promocionais sujeitos à disponibilidade por região."
+      },
+      en: {
+        nav_features: "Features",
+        nav_demo: "Interactive Demo",
+        nav_compare: "Comparison",
+        nav_pricing: "Plans",
+        nav_faq: "FAQ",
+        nav_cta: "Subscribe Now",
+        hero_pill: "New Era of Google Artificial Intelligence",
+        hero_title_p1: "Supercharge your work with",
+        hero_title_gradient: "Gemini Pro",
+        hero_subtitle: "Our most refined multimodal intelligence. Access a massive context window of up to 2 million tokens, senior computational reasoning, and seamless integration across Google Workspace.",
+        hero_primary_cta: "Get Gemini Pro",
+        hero_secondary_cta: "View plans & pricing",
+        hero_guarantee: "Instant activation • Cancel online anytime with 1 click",
+        hero_card_status: "Ultra Connection Active",
+        hero_loaded_title: "Active Multimodal Input",
+        hero_prompt_label: "Your prompt:",
+        hero_prompt_text: '"Cross-examine page 412 of the PDF with the key decision at 01:14:20 of the video recording and inspect the impact on the core repo."',
+        hero_gemini_thinking: "Gemini Pro • Multimodal Synthesis in 0.8s",
+        hero_response_1: "<strong>1. Instant Correlation:</strong> The latency reduction target outlined on page 412 (< 45ms) aligns directly with the CTO directive at 01:14:20 in the board recording.",
+        hero_response_2: "<strong>2. Codebase Diagnostic:</strong> Found that <code class='font-mono bg-gray-100 px-1 py-0.5 rounded text-purple-700'>ingress_controller.rs</code> and <code class='font-mono bg-gray-100 px-1 py-0.5 rounded text-purple-700'>mesh_config.yaml</code> contain static 120ms buffers that need to be migrated to the asynchronous pipeline.",
+        hero_tag_1: "✓ 1.2M tokens ingested",
+        hero_tag_2: "✓ Migration script ready",
+        stat_tokens: "Context Tokens",
+        stat_tokens_sub: "Highest capacity on earth",
+        stat_languages: "Supported Languages",
+        stat_languages_sub: "Code & natural languages",
+        stat_speed: "Generation Speed",
+        stat_speed_sub: "Ultra-low latency architecture",
+        stat_security: "Google Cloud Enterprise",
+        stat_security_sub: "End-to-end data privacy",
+        features_tag: "Exclusive Capabilities",
+        features_title: "Engineered to surpass human boundaries",
+        features_subtitle: "Discover the architectural pillars that make Gemini Pro the definitive AI companion for creators and engineers.",
+        feat_1_title: "2 Million Token Window",
+        feat_1_desc: "Upload 1,500-page enterprise manuals, hours of raw audio interviews, or entire production software repositories in a single run without losing nuance.",
+        feat_learn_more: "Unmatched Context",
+        feat_2_title: "Native Multimodal Reasoning",
+        feat_2_desc: "Built from the foundation to simultaneously see, listen, and comprehend text, high-res imagery, audio streams, and 4K video clips without fidelity loss.",
+        feat_2_badge: "Vision, Audio & Video",
+        feat_3_title: "Senior Code Engineering",
+        feat_3_desc: "Refactor complex legacy codebases, architect automated testing suites, and eliminate concurrency bottlenecks with pinpoint precision.",
+        feat_3_badge: "Python, TS, Go, Rust & C++",
+        feat_4_title: "Google Workspace Integration",
+        feat_4_desc: "Draft presentations in Slides, summarize email threads in Gmail, and analyze complex models in Google Sheets via simple conversational commands.",
+        feat_4_badge: "Docs, Gmail & Drive Powered",
+        feat_5_title: "Priority Access & Zero Queues",
+        feat_5_desc: "No throttling during global peak hours. Gain significantly higher rate limits and be the first to evaluate experimental models from Google Labs.",
+        feat_5_badge: "99.9% High Availability",
+        feat_6_title: "Enterprise Shielded Privacy",
+        feat_6_desc: "Your proprietary files, source code, and prompts are never used to train public Google AI foundation models. Fully encrypted at rest and in transit.",
+        feat_6_badge: "ISO & SOC 2/3 Compliant",
+        demo_tag: "Interactive Sandbox",
+        demo_title: "Experience the reasoning horsepower of Gemini Pro",
+        demo_subtitle: "Select a real-world scenario below and watch the model deconstruct complexity into actionable solutions in real time.",
+        demo_tab_code: "Code Refactoring",
+        demo_tab_data: "Massive Data Audit",
+        demo_tab_creative: "Executive Strategy",
+        demo_input_label: "Uploaded File & Prompt Directive",
+        demo_response_label: "Gemini Pro Generation",
+        demo_btn_replay: "Run Again",
+        comp_tag: "Plan Comparison",
+        comp_title: "Why upgrade to Gemini Pro?",
+        comp_subtitle: "Explore the structural differences between our free tier and the flagship model.",
+        comp_col_feature: "Features & Capabilities",
+        comp_col_free: "Gemini Standard (Free)",
+        comp_col_pro: "Gemini Pro (Full)",
+        comp_row1_title: "Context Window",
+        comp_row1_free: "Up to 32,000 tokens (~40 pages)",
+        comp_row1_pro: "Up to 2,000,000 tokens (~2,500 pages)",
+        comp_row2_title: "Video Multimodal Reasoning",
+        comp_row2_free: "Short clips (up to 2 min)",
+        comp_row2_pro: "Hours of full length 4K video",
+        comp_row3_title: "Code Execution & Debugging",
+        comp_row3_free: "Basic snippets with daily caps",
+        comp_row3_pro: "Senior software engineering across full repos",
+        comp_row4_title: "Google Workspace Integration",
+        comp_row4_free: "Not included",
+        comp_row4_pro: "Native in Docs, Gmail, Sheets & Slides",
+        comp_row5_title: "Google One Cloud Storage",
+        comp_row5_free: "15 GB standard shared space",
+        comp_row5_pro: "2 TB (2,000 GB) cloud storage included",
+        comp_row6_title: "Model Data Training",
+        comp_row6_free: "Standard quality sampling",
+        comp_row6_pro: "100% Private — Zero training on your inputs",
+        pricing_badge: "Google One AI Premium Membership",
+        pricing_title: "Transparent and flexible investment",
+        pricing_subtitle: "Instant access to premium intelligence. Cancel with a single click from your Google account dashboard.",
+        billing_monthly: "Monthly Billing",
+        billing_annual: "Annual Billing",
+        billing_discount: "SAVE 15%",
+        card_free_title: "Gemini Standard",
+        card_free_badge: "For everyone",
+        card_free_desc: "For quick daily inquiries, casual drafting, and general queries.",
+        card_free_period: " / forever free",
+        card_free_item1: "Standard Gemini Flash model",
+        card_free_item2: "Standard context window (32k tokens)",
+        card_free_item3: "15 GB shared Google storage",
+        card_free_item4: "No Workspace AI integration",
+        card_free_cta: "Use Free Version",
+        card_pro_pill: "RECOMMENDED BY GOOGLE",
+        card_pro_ai_badge: "Advanced AI",
+        card_pro_desc: "For developers, researchers, founders, and creators who demand elite intelligence.",
+        card_pro_item1: "Expansive context window of up to 2M tokens",
+        card_pro_item2: "Native integration in Gmail, Docs, Sheets & Slides",
+        card_pro_item3: "2 TB (2,000 GB) Google One high-speed cloud storage",
+        card_pro_item4: "Priority access to cutting-edge reasoning checkpoints",
+        card_pro_item5: "Family sharing for up to 5 additional members",
+        card_pro_cta: "Subscribe to Gemini Pro",
+        card_pro_cancel_notice: "Flexible membership. Cancel anytime with zero fees.",
+        faq_tag: "Frequently Asked Questions",
+        faq_title: "Common questions about Gemini Pro",
+        faq_subtitle: "Everything you need to know about billing, capabilities, and security.",
+        faq_q1: "How does subscription and activation work?",
+        faq_a1: "Immediately upon payment confirmation, full access to Gemini Pro features and 2 TB of Google One storage is unlocked for your account. You can manage or cancel your renewal anytime with zero hassle.",
+        faq_q2: "What does a 2 million token context window mean in practice?",
+        faq_a2: "Context window defines how much material the AI can hold simultaneously in its immediate memory. With 2 million tokens, you can feed roughly 1.4 million words, 1 hour of video, or entire code repositories in a single prompt.",
+        faq_q3: "Is my personal or business data used to train Google models?",
+        faq_a3: "No. With the Gemini Pro tier under Google One AI Premium, your private files, prompts, and codebases are strictly confidential. They are never ingested into Google's foundation training sets.",
+        faq_q4: "Can I share my subscription with family members?",
+        faq_a4: "Yes! The subscription includes Google One Family Sharing, enabling you to share the 2 TB cloud storage pool with up to 5 additional people while keeping everyone's personal files private.",
+        bottom_cta_title: "Ready to elevate your everyday output?",
+        bottom_cta_subtitle: "Join millions of professionals and developers powered by Google's most sophisticated AI.",
+        bottom_cta_btn: "Get Gemini Pro Now",
+        bottom_cta_terms: "Available in 150+ countries • 24/7 dedicated Google support",
+        footer_legal_notice: `<strong class="text-google-dark font-semibold">Legal Disclaimer:</strong> This platform and its tools are independent and have no official affiliation, endorsement, or relationship with Google LLC, Google One, or Gemini.`,
+        footer_terms: "Terms of Service",
+        footer_privacy: "Privacy Policy",
+        footer_payments: "Delivery & Crypto/Pix Payments Policy",
+        footer_security: "Google Cloud Security",
+        footer_support: "Help Center",
+        footer_disclaimer: "Pricing and promotions subject to regional availability and local tax laws."
+      }
+    };
+
+    // Demo Data Sets
+    const demoScenarios = {
+      code: {
+        promptPt: `📁 Arquivo: <strong>cluster_controller.go</strong> (2.400 linhas)\n💬 Comando: "Detecte race conditions nos canais de sync e reescreva para Go 1.22 com zero-allocation."`,
+        promptEn: `📁 File: <strong>cluster_controller.go</strong> (2,400 lines)\n💬 Directive: "Detect race conditions on synchronization channels and refactor for Go 1.22 with zero allocations."`,
+        outputPt: `// ✅ Gemini Pro: 2 deadlocks potenciais identificados no loop select (linhas 412 e 489).
+// Solução otimizada com atomic.Pointer e sync.Pool:
+
+package controller
+
+import (
+    "sync"
+    "sync/atomic"
+)
+
+type WorkerPool struct {
+    state atomic.Pointer[ClusterState]
+    pool  sync.Pool
+}
+
+func (w *WorkerPool) Dispatch(task Task) error {
+    // Zero-allocation buffer acquire
+    buf := w.pool.Get().(*Buffer)
+    defer w.pool.Put(buf)
+    
+    return buf.ProcessConcurrent(task, w.state.Load())
+}
+// Benchmark: +340% throughput, 0 bytes/op alocados.`,
+        outputEn: `// ✅ Gemini Pro: 2 potential deadlocks resolved in select loop (lines 412 & 489).
+// Zero-allocation refactor utilizing atomic.Pointer and sync.Pool:
+
+package controller
+
+import (
+    "sync"
+    "sync/atomic"
+)
+
+type WorkerPool struct {
+    state atomic.Pointer[ClusterState]
+    pool  sync.Pool
+}
+
+func (w *WorkerPool) Dispatch(task Task) error {
+    // Zero-allocation buffer acquire
+    buf := w.pool.Get().(*Buffer)
+    defer w.pool.Put(buf)
+    
+    return buf.ProcessConcurrent(task, w.state.Load())
+}
+// Benchmark: +340% throughput, 0 bytes/op allocated.`
+      },
+      data: {
+        promptPt: `📊 Arquivo: <strong>dre_consolidado_trimestral.xlsx</strong> (14 abas, 350.000 linhas)\n💬 Comando: "Identifique anomalias de margem operacional e projete o EBITDA para Q4."`,
+        promptEn: `📊 File: <strong>quarterly_consolidated_financials.xlsx</strong> (14 sheets, 350,000 rows)\n💬 Directive: "Identify operating margin anomalies and calculate forecast EBITDA for Q4."`,
+        outputPt: `📈 RELATÓRIO EXECUTIVO GERADO POR GEMINI PRO:
+
+1. ANOMALIA DETECTADA:
+   • Na filial EMEA (aba 'Consol_EUR'), os custos de nuvem saltaram 48.2% em agosto.
+   • Causa raiz identificada: Instâncias GPU não provisionadas esquecidas ativas (coluna DX, linha 12.404).
+
+2. PROJEÇÃO Q4 RECALCULADA:
+   • EBITDA Projetado: R$ 42.8M (Margem de 23.4%)
+   • Economia imediata recomendada: R$ 1.8M com desligamento de instâncias ociosas.`,
+        outputEn: `📈 EXECUTIVE SYNTHESIS GENERATED BY GEMINI PRO:
+
+1. DETECTED ANOMALY:
+   • In EMEA branch ('Consol_EUR' tab), cloud hosting surged by +48.2% in August.
+   • Root cause localized: Unallocated GPU instances kept idle in cluster-east (col DX, row 12,404).
+
+2. RECALCULATED Q4 FORECAST:
+   • Forecast EBITDA: $42.8M (23.4% Net Margin)
+   • Immediate salvage value: $1.8M through automated tear-down of orphaned cloud assets.`
+      },
+      creative: {
+        promptPt: `📄 Arquivos: <strong>50 transcrições de entrevistas com clientes B2B</strong>\n💬 Comando: "Sintetize os 3 maiores descontentamentos e redija um memorando executivo de produto."`,
+        promptEn: `📄 Files: <strong>50 customer interview transcripts with enterprise users</strong>\n💬 Directive: "Synthesize the top 3 friction points and draft an executive product memorandum."`,
+        outputPt: `MEMORANDO DE PRODUTO — CONFIDENCIAL
+Para: Comitê de Produto & Diretoria de Engenharia
+De: Gemini Pro Intelligence
+
+TOP 3 PONTOS DE FRICÇÃO MAPEADOS (78% de recorrência):
+1. 'Tempo excessivo de onboarding de novos colaboradores nas ferramentas atuais.'
+2. 'Falta de relatórios consolidados em PDF com um único clique.'
+3. 'Dificuldade de exportação em formatos compatíveis com BI externo.'
+
+RECOMENDAÇÃO DE ROADMAP:
+Reorientar o sprint 34 para implementação do conector nativo de dados e templates de exportação instantânea.`,
+        outputEn: `EXECUTIVE PRODUCT MEMORANDUM — CONFIDENTIAL
+To: Product Committee & VP of Engineering
+From: Gemini Pro Intelligence
+
+TOP 3 FRICTION POINTS LOCATED (78% mention frequency):
+1. 'Excessive onboarding ramp time for junior staff on existing suites.'
+2. 'Absence of single-click audit-ready PDF rollups.'
+3. 'Friction when piping custom schemas into external BI lakes.'
+
+STRATEGIC ROADMAP RECOMMENDATION:
+Reallocate Sprint 34 to prioritize native data export pipelines and automated template generation.`
+      }
+    };
+
+    // Switch Language Function (Executado exclusivamente de forma automática pela detecção)
+    function switchLanguage(lang) {
+      currentLang = lang;
+      
+      if (lang === 'pt') {
+        document.documentElement.lang = "pt-BR";
+        const footerLabel = document.getElementById('footerLangLabel');
+        if (footerLabel) footerLabel.textContent = "Português (Brasil) — BRL";
+      } else {
+        document.documentElement.lang = "en";
+        const footerLabel = document.getElementById('footerLangLabel');
+        if (footerLabel) footerLabel.textContent = "English (Global) — USD";
+      }
+
+      // Update all elements with data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18nData[lang] && i18nData[lang][key]) {
+          el.innerHTML = i18nData[lang][key];
+        }
+      });
+
+      // Update dynamic pricing
+      updatePriceDisplay();
+
+      // Refresh current interactive demo tab
+      renderDemoContent();
+    }
+
+    // Update Price Display according to currency and billing cycle
+    function updatePriceDisplay() {
+      const priceEl = document.getElementById('priceDisplay');
+      const periodEl = document.getElementById('periodDisplay');
+      const subPriceEl = document.getElementById('subPriceDisplay');
+
+      if (!priceEl || !periodEl || !subPriceEl) return;
+
+      if (currentLang === 'pt') {
+        if (currentBilling === 'monthly') {
+          priceEl.textContent = "R$ 94,90";
+          periodEl.textContent = " / mês";
+          subPriceEl.textContent = "Pagamento via Pix instantâneo • Liberação imediata";
+        } else {
+          priceEl.textContent = "R$ 79,90";
+          periodEl.textContent = " / mês faturado anualmente";
+          subPriceEl.textContent = "Economia de R$ 180 ao ano (15% OFF)";
+        }
+      } else {
+        if (currentBilling === 'monthly') {
+          priceEl.textContent = "$40";
+          periodEl.textContent = " / month";
+          subPriceEl.textContent = "Instant access via Web3 / Card • Immediate activation";
+        } else {
+          priceEl.textContent = "$34";
+          periodEl.textContent = " / month billed annually";
+          subPriceEl.textContent = "Save over $72 per year (15% OFF)";
+        }
+      }
+    }
+
+    /**
+     * Detecção Automática e Exclusiva de Localização (Brasil vs Exterior)
+     * A alternância entre R$ (Pix) e USD (Web3/Card) ocorre 100% automaticamente pelo local de acesso:
+     * - Se Brasil -> PT-BR, Preço em R$ (R$ 94,90), Checkout Pix
+     * - Se Fora do Brasil -> EN, Preço em USD ($40), Checkout Web3 / Card
+     */
+    function autoDetectLocationAndSetLanguage() {
+      // 1. Detecção síncrona instantânea (Fuso Horário & Idioma do Navegador)
+      let isBrazil = false;
+      try {
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+        const navLanguages = (navigator.languages || []).map(l => l.toLowerCase());
+
+        const brazilTimezones = [
+          'America/Sao_Paulo', 'America/Fortaleza', 'America/Recife', 'America/Belem',
+          'America/Manaus', 'America/Cuiaba', 'America/Porto_Velho', 'America/Boa_Vista',
+          'America/Campo_Grande', 'America/Rio_Branco', 'America/Maceio', 'America/Bahia',
+          'America/Noronha', 'America/Santarem', 'America/Araguaina', 'America/Eirunepe',
+          'America/Porto_Acre'
+        ];
+
+        const isBrazilTz = brazilTimezones.includes(timeZone) || 
+          (timeZone.startsWith('America/') && (
+            timeZone.includes('Sao_Paulo') || 
+            timeZone.includes('Recife') || 
+            timeZone.includes('Fortaleza') || 
+            timeZone.includes('Manaus') || 
+            timeZone.includes('Cuiaba') || 
+            timeZone.includes('Belem')
+          ));
+
+        const isPtBrLang = navLang === 'pt-br' || navLang === 'pt' || navLanguages.some(l => l.startsWith('pt'));
+
+        if (isBrazilTz) {
+          isBrazil = true;
+        } else if (isPtBrLang) {
+          const offsetMinutes = new Date().getTimezoneOffset();
+          // Offset típico do Brasil (UTC-2 a UTC-5) -> 120 a 300 minutos
+          if (offsetMinutes >= 120 && offsetMinutes <= 300) {
+            isBrazil = true;
+          }
+        }
+      } catch (err) {
+        console.warn('Detecção local:', err);
+      }
+
+      // Aplica o idioma e moeda detectados imediatamente
+      switchLanguage(isBrazil ? 'pt' : 'en');
+
+      // 2. Validação assíncrona por IP em segundo plano para precisão máxima
+      fetchGeoIPCountry();
+    }
+
+    async function fetchGeoIPCountry() {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+
+        const response = await fetch('https://api.country.is/', { signal: controller.signal })
+          .catch(() => fetch('https://ipapi.co/json/', { signal: controller.signal }));
+
+        clearTimeout(timeoutId);
+        if (!response || !response.ok) return;
+
+        const data = await response.json();
+        const countryCode = (data.country || data.country_code || '').toUpperCase();
+
+        if (countryCode) {
+          const isBrazil = (countryCode === 'BR');
+          const targetLang = isBrazil ? 'pt' : 'en';
+          if (targetLang !== currentLang) {
+            switchLanguage(targetLang);
+          }
+        }
+      } catch (e) {
+        // Fallback silencioso mantendo detecção síncrona
+      }
+    }
+
+    // Set Billing Cycle
+    function setBillingCycle(cycle) {
+      currentBilling = cycle;
+      const monthlyBtn = document.getElementById('billMonthlyBtn');
+      const annualBtn = document.getElementById('billAnnualBtn');
+
+      if (cycle === 'monthly') {
+        monthlyBtn.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-google-dark shadow-sm";
+        annualBtn.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all text-google-muted hover:text-google-dark flex items-center gap-1.5";
+      } else {
+        annualBtn.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-google-dark shadow-sm flex items-center gap-1.5";
+        monthlyBtn.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all text-google-muted hover:text-google-dark";
+      }
+      updatePriceDisplay();
+    }
+
+    // Interactive Demo Tab Switcher
+    function setDemoTab(tab) {
+      currentTab = tab;
+      
+      const tabs = ['code', 'data', 'creative'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`tab${t.charAt(0).toUpperCase() + t.slice(1)}Btn`);
+        if (t === tab) {
+          btn.className = "py-4 px-4 text-sm font-semibold border-b-2 border-google-blue text-google-blue flex items-center gap-2 whitespace-nowrap transition-colors";
+        } else {
+          btn.className = "py-4 px-4 text-sm font-medium border-b-2 border-transparent text-google-muted hover:text-google-dark flex items-center gap-2 whitespace-nowrap transition-colors";
+        }
+      });
+
+      renderDemoContent();
+    }
+
+    // Render Demo content with simulated typing animation
+    function renderDemoContent() {
+      const data = demoScenarios[currentTab];
+      const promptContainer = document.getElementById('demoPromptContent');
+      const outputBox = document.getElementById('demoOutputBox');
+      const spinner = document.getElementById('demoSpinIcon');
+
+      // Set prompt
+      promptContainer.innerHTML = currentLang === 'pt' ? data.promptPt : data.promptEn;
+
+      // Simulated stream typing
+      spinner.style.display = 'inline-block';
+      outputBox.textContent = "";
+      
+      const fullText = currentLang === 'pt' ? data.outputPt : data.outputEn;
+      let charIdx = 0;
+      
+      clearInterval(window.demoTypeTimer);
+      window.demoTypeTimer = setInterval(() => {
+        if (charIdx < fullText.length) {
+          outputBox.textContent += fullText[charIdx];
+          charIdx++;
+        } else {
+          clearInterval(window.demoTypeTimer);
+          spinner.style.display = 'none';
+        }
+      }, 5);
+    }
+
+    function replayCurrentDemo() {
+      renderDemoContent();
+    }
+
+    // FAQ Accordion Toggle
+    function toggleFaq(index) {
+      const answer = document.getElementById(`faqAnswer-${index}`);
+      const icon = document.getElementById(`faqIcon-${index}`);
+      
+      const isHidden = answer.classList.contains('hidden');
+      
+      // Close all
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById(`faqAnswer-${i}`).classList.add('hidden');
+        document.getElementById(`faqIcon-${i}`).classList.remove('rotate-180');
+      }
+
+      if (isHidden) {
+        answer.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+      }
+    }
+
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    /**
+     * CONTEÚDO INSTITUCIONAL (Ad Compliance & Proteção Contratual)
+     * Textos detalhados e estruturados para Termos de Serviço, Privacidade e Entrega Cripto/Pix.
+     */
+    const institutionalContent = {
+      terms: {
+        pt: {
+          title: "Termos de Serviço e Uso Aceitável",
+          html: `
+            <div class="space-y-4">
+              <div class="p-4 rounded-2xl bg-blue-50/60 border border-blue-100 text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-google-dark text-sm block mb-1">1. Aceitação dos Termos e Finalidade</strong>
+                <p class="text-google-muted leading-relaxed">
+                  Ao assinar e utilizar esta plataforma de aceleração e ferramentas computacionais do Gemini Pro, você concorda expressamente com estas regras de utilização. O serviço destina-se a fins profissionais, de pesquisa, engenharia de software e produtividade pessoal.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-rose-50/60 border border-rose-100 text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-rose-700 text-sm block mb-1">2. Política Estrita de Uso Aceitável e Suspensão por Abuso de API</strong>
+                <p class="text-google-muted leading-relaxed">
+                  É terminantemente vedado o uso da plataforma para atividades maliciosas, ataques de negação de serviço distribuído (DDoS), varredura ou scraping abusivo de infraestrutura, revenda de requisições de API não autorizada, tentativa de contorno de controles de taxa (rate limits) ou engenharia reversa.
+                </p>
+                <p class="mt-2 text-rose-700 font-semibold leading-relaxed">
+                  A detecção de qualquer comportamento abusivo, atividade automatizada lesiva ou tentativa de contorno dos limites computacionais acarretará o bloqueio e suspensão imediata e definitiva da conta e do acesso à API, sem prévia notificação e sem direito a estorno ou indenização.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-gray-50 border border-google-border text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-google-dark text-sm block mb-1">3. Disponibilidade e Garantia de Nível de Serviço</strong>
+                <p class="text-google-muted leading-relaxed">
+                  Trabalhamos para garantir uma infraestrutura com disponibilidade operacional contínua (alvo de 99.9%). Interrupções temporárias decorrentes de manutenções programadas de segurança, atualizações de infraestrutura em nuvem ou indisponibilidades globais de provedores upstream não configuram quebra de contrato.
+                </p>
+              </div>
+            </div>
+          `
+        },
+        en: {
+          title: "Terms of Service & Acceptable Use Policy",
+          html: `
+            <div class="space-y-4">
+              <div class="p-4 rounded-2xl bg-blue-50/60 border border-blue-100 text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-google-dark text-sm block mb-1">1. Acceptance of Terms & Intended Use</strong>
+                <p class="text-google-muted leading-relaxed">
+                  By subscribing to and utilizing this platform and Gemini Pro computational accelerators, you explicitly agree to these operational terms. Access is granted for engineering, research, professional workflows, and productivity enhancement.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-rose-50/60 border border-rose-100 text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-rose-700 text-sm block mb-1">2. Strict Acceptable Use & Immediate Suspension for API Abuse</strong>
+                <p class="text-google-muted leading-relaxed">
+                  You may not utilize this platform for malicious attacks, DDoS flooding, abusive web scraping, unauthorized API reselling, rate-limit evasion, credential harvesting, or unauthorized reverse engineering.
+                </p>
+                <p class="mt-2 text-rose-700 font-semibold leading-relaxed">
+                  Any detected API abuse, automated flooding, or violation of computational security boundaries will trigger immediate, irrevocable account termination and access revocation without notice, unilateral refund, or recourse.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-gray-50 border border-google-border text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-google-dark text-sm block mb-1">3. Availability & Service Commitments</strong>
+                <p class="text-google-muted leading-relaxed">
+                  We maintain industry-standard high availability (target 99.9%). Temporary interruptions resulting from upstream provider maintenance or critical security patches do not constitute a breach of agreement.
+                </p>
+              </div>
+            </div>
+          `
+        }
+      },
+      privacy: {
+        pt: {
+          title: "Política de Privacidade e Proteção de Dados",
+          html: `
+            <div class="space-y-4">
+              <div class="p-4 rounded-2xl bg-emerald-50/60 border border-emerald-100 text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-emerald-800 text-sm block mb-1">1. Princípio de Coleta Mínima Estrita</strong>
+                <p class="text-google-muted leading-relaxed">
+                  Em estrita conformidade com as melhores práticas de cibersegurança e normas de proteção de dados (LGPD e GDPR), nossa infraestrutura opera sob o princípio de minimização absoluta de dados.
+                </p>
+                <p class="mt-2 text-google-dark font-medium leading-relaxed">
+                  Coletamos exclusivamente:
+                </p>
+                <ul class="list-disc list-inside mt-1.5 text-google-muted space-y-1">
+                  <li><strong>E-mail:</strong> Unicamente para autenticação, emissão de faturamento e entrega das credenciais de acesso.</li>
+                  <li><strong>Hash da Transação:</strong> Identificador público de liquidação (Pix E2E ID ou blockchain transaction hash) para fins de conciliação contábil e auditoria técnica.</li>
+                </ul>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-blue-50/60 border border-blue-100 text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-google-dark text-sm block mb-1">2. Não Armazenamento de Dados Financeiros Sensíveis</strong>
+                <p class="text-google-muted leading-relaxed">
+                  Não mantemos, registramos ou temos acesso a dados de cartão de crédito, senhas bancárias ou chaves privadas de carteiras Web3. Todo o processamento financeiro é realizado diretamente pelos gateways integrados através de canais criptografados ponta a ponta.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-gray-50 border border-google-border text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-google-dark text-sm block mb-1">3. Sigilo Absoluto dos Prompts e Dados Computacionais</strong>
+                <p class="text-google-muted leading-relaxed">
+                  Seus dados, códigos proprietários, documentos enviados para análise e prompts de IA são 100% confidenciais. Eles nunca são comercializados, compartilhados com terceiros ou utilizados para treinar modelos fundacionais públicos.
+                </p>
+              </div>
+            </div>
+          `
+        },
+        en: {
+          title: "Privacy Policy & Data Protection",
+          html: `
+            <div class="space-y-4">
+              <div class="p-4 rounded-2xl bg-emerald-50/60 border border-emerald-100 text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-emerald-800 text-sm block mb-1">1. Strict Data Minimization Principle</strong>
+                <p class="text-google-muted leading-relaxed">
+                  Adhering strictly to GDPR and global privacy benchmarks, our infrastructure operates on zero-knowledge, data-minimal architecture.
+                </p>
+                <p class="mt-2 text-google-dark font-medium leading-relaxed">
+                  We collect only:
+                </p>
+                <ul class="list-disc list-inside mt-1.5 text-google-muted space-y-1">
+                  <li><strong>Email Address:</strong> Solely for account authentication, receipt delivery, and credential provisioning.</li>
+                  <li><strong>Transaction Hash:</strong> The cryptographic transaction ID or settlement hash required for automated ledger reconciliation.</li>
+                </ul>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-blue-50/60 border border-blue-100 text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-google-dark text-sm block mb-1">2. Zero Storage of Sensitive Financial Data</strong>
+                <p class="text-google-muted leading-relaxed">
+                  We do not collect or store credit card numbers, CVVs, bank credentials, or Web3 private keys. Financial processing is managed securely by specialized decentralized and PCI-compliant gateways.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-gray-50 border border-google-border text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-google-dark text-sm block mb-1">3. Computational Confidentiality</strong>
+                <p class="text-google-muted leading-relaxed">
+                  Your prompts, codebase extracts, uploaded files, and AI results remain strictly private. Under no circumstance are they used to train public foundational AI models or sold to third parties.
+                </p>
+              </div>
+            </div>
+          `
+        }
+      },
+      payments: {
+        pt: {
+          title: "Política de Entrega e Pagamentos Cripto/Pix",
+          html: `
+            <div class="space-y-4">
+              <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-amber-800 text-sm block mb-1">1. Entrega Imediata de Bens Digitais e Recursos Computacionais</strong>
+                <p class="text-google-muted leading-relaxed">
+                  Nos termos da legislação aplicável a serviços de tecnologia e bens digitais consumíveis, o acesso ao Gemini Pro e à cota computacional é liberado e ativado de forma <strong>imediata, automática e definitiva</strong> após a confirmação da liquidação financeira pelo gateway.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-rose-50/60 border border-rose-100 text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-rose-700 text-sm block mb-1">2. Irreversibilidade de Liquidações Pix e Ativos Cripto (Web3)</strong>
+                <p class="text-google-muted leading-relaxed">
+                  As transações executadas via Pix com liquidação em criptoativos ou liquidadas diretamente em blockchain possuem <strong>natureza técnica imutável, definitiva e irreversível</strong>. Devido à liquidação instantânea em livros-razão descentralizados e à imediata provisão de capacidade computacional dedicada, <strong>não há possibilidade técnica ou contratual de estorno unilateral, cancelamento retroativo ou chargeback</strong>.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-blue-50/60 border border-blue-100 text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-google-dark text-sm block mb-1">3. Ciência e Anuência Prévia do Usuário</strong>
+                <p class="text-google-muted leading-relaxed">
+                  Ao confirmar o consentimento no modal pré-checkout e efetuar o pagamento, o cliente atesta ter ciência plena de que o produto digital é consumado no momento da disponibilização das credenciais, concordando expressamente com a finalidade definitiva do pagamento efetuado.
+                </p>
+              </div>
+            </div>
+          `
+        },
+        en: {
+          title: "Delivery & Crypto/Pix Payments Policy",
+          html: `
+            <div class="space-y-4">
+              <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-amber-800 text-sm block mb-1">1. Immediate Fulfillment of Digital Compute Assets</strong>
+                <p class="text-google-muted leading-relaxed">
+                  In accordance with governing digital software and cloud compute regulations, access credentials and dedicated high-priority Gemini Pro quotas are provisioned <strong>instantaneously and irrevocably</strong> upon receipt of network settlement confirmation.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-rose-50/60 border border-rose-100 text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-rose-700 text-sm block mb-1">2. Irreversibility of Instant Pix & Blockchain Transactions</strong>
+                <p class="text-google-muted leading-relaxed">
+                  Payments finalized through instant Pix fiat-to-crypto rails or decentralized Web3 smart contracts are <strong>cryptographically definitive and irreversible</strong> by design. Because compute allocations are reserved and consumed immediately upon verification, <strong>unilateral chargebacks, retroactive reversals, and refunds cannot be executed</strong>.
+                </p>
+              </div>
+
+              <div class="p-4 rounded-2xl bg-blue-50/60 border border-blue-100 text-xs sm:text-sm text-google-dark">
+                <strong class="font-semibold text-google-dark text-sm block mb-1">3. Explicit Prior Consent</strong>
+                <p class="text-google-muted leading-relaxed">
+                  By checking the mandatory acknowledgment box during pre-checkout and submitting payment, the user certifies full understanding and agreement that the digital service is fulfilled upon credential dispatch, and confirms all transactions are final.
+                </p>
+              </div>
+            </div>
+          `
+        }
+      }
+    };
+
+    // Modal Institucional (Termos, Privacidade, Entrega e Pagamentos)
+    function openInstitutionalModal(type) {
+      const modal = document.getElementById('institutionalModal');
+      const card = document.getElementById('institutionalModalCard');
+      const titleEl = document.getElementById('institutionalModalTitle');
+      const bodyEl = document.getElementById('institutionalModalBody');
+
+      if (!modal || !card || !titleEl || !bodyEl) return;
+
+      const lang = (currentLang === 'pt') ? 'pt' : 'en';
+      const content = institutionalContent[type] && institutionalContent[type][lang];
+
+      if (content) {
+        titleEl.textContent = content.title;
+        bodyEl.innerHTML = content.html;
+      }
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-95');
+      card.classList.add('scale-100');
+    }
+
+    function closeInstitutionalModal() {
+      const modal = document.getElementById('institutionalModal');
+      const card = document.getElementById('institutionalModalCard');
+      if (!modal || !card) return;
+
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+    }
+
+    // Modal de Confirmação Pré-Checkout (Compliance & Consentimento Obrigatório)
+    function openCheckoutConfirmModal() {
+      const modal = document.getElementById('checkoutConfirmModal');
+      const card = document.getElementById('checkoutConfirmCard');
+      const titleEl = document.getElementById('checkoutConfirmTitle');
+      const subtitleEl = document.getElementById('checkoutConfirmSubtitle');
+      const billingEl = document.getElementById('checkoutConfirmBillingLabel');
+      const priceEl = document.getElementById('checkoutConfirmPriceLabel');
+      const noticeEl = document.getElementById('checkoutConfirmNoticeText');
+      const consentLabel = document.getElementById('checkoutConsentLabel');
+      const errorMsg = document.getElementById('checkoutConsentError');
+      const errorText = document.getElementById('checkoutConsentErrorText');
+      const checkbox = document.getElementById('checkoutConsentCheckbox');
+      const container = document.getElementById('checkoutCheckboxContainer');
+      const cancelBtn = document.getElementById('checkoutCancelBtn');
+      const proceedBtnText = document.getElementById('btnProceedCheckoutText');
+
+      if (!modal || !card) return;
+
+      // Reset estado da validação
+      if (checkbox) checkbox.checked = false;
+      if (errorMsg) errorMsg.classList.add('hidden');
+      if (container) {
+        container.classList.remove('border-rose-400', 'bg-rose-50/40');
+        container.classList.add('border-gray-200', 'bg-white');
+      }
+
+      // Textos dinâmicos por idioma e ciclo de faturamento
+      const isPt = currentLang === 'pt';
+      const isMonthly = currentBilling === 'monthly';
+
+      if (titleEl) titleEl.textContent = isPt ? "Confirmação Pré-Checkout" : "Pre-Checkout Confirmation";
+      if (subtitleEl) subtitleEl.textContent = isPt 
+        ? "Ambiente seguro com liquidação e ativação instantânea" 
+        : "Secure environment with instant settlement & activation";
+
+      if (billingEl) {
+        if (isPt) {
+          billingEl.textContent = isMonthly ? "(Mensal — Pix Seguro)" : "(Anual — Pix Seguro 15% OFF)";
+        } else {
+          billingEl.textContent = isMonthly ? "(Monthly — Web3 / Card)" : "(Annual — Web3 / Card 15% OFF)";
+        }
+      }
+
+      if (priceEl) {
+        if (isPt) {
+          priceEl.textContent = isMonthly ? "R$ 94,90" : "R$ 79,90";
+        } else {
+          priceEl.textContent = isMonthly ? "$40" : "$34";
+        }
+      }
+
+      if (noticeEl) {
+        noticeEl.textContent = isPt
+          ? "Os recursos e credenciais computacionais são provisionados imediatamente após a liquidação do pagamento."
+          : "Compute resources and credentials are automatically provisioned immediately upon transaction confirmation.";
+      }
+
+      if (consentLabel) {
+        consentLabel.textContent = isPt
+          ? "Estou ciente de que o acesso é liberado de forma imediata e definitiva, e que pagamentos via Pix com liquidação em criptoativos ou via carteira Web3 não possuem estorno unilateral."
+          : "I acknowledge that access is granted immediately and irrevocably, and that instant Pix/crypto Web3 transactions cannot be unilaterally reversed.";
+      }
+
+      if (errorText) {
+        errorText.textContent = isPt
+          ? "Você precisa marcar a caixa de consentimento acima para prosseguir."
+          : "You must check the consent box above to proceed.";
+      }
+
+      if (cancelBtn) {
+        cancelBtn.textContent = isPt ? "Cancelar" : "Cancel";
+      }
+
+      if (proceedBtnText) {
+        proceedBtnText.textContent = isPt ? "Continuar para Pagamento Seguro" : "Proceed to Secure Payment";
+      }
+
+      // Exibe modal
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-95');
+      card.classList.add('scale-100');
+    }
+
+    function closeCheckoutConfirmModal() {
+      const modal = document.getElementById('checkoutConfirmModal');
+      const card = document.getElementById('checkoutConfirmCard');
+      if (!modal || !card) return;
+
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+    }
+
+    function onCheckoutConsentChange() {
+      const checkbox = document.getElementById('checkoutConsentCheckbox');
+      const errorMsg = document.getElementById('checkoutConsentError');
+      const container = document.getElementById('checkoutCheckboxContainer');
+
+      if (checkbox && checkbox.checked) {
+        if (errorMsg) errorMsg.classList.add('hidden');
+        if (container) {
+          container.classList.remove('border-rose-400', 'bg-rose-50/40');
+          container.classList.add('border-gray-200', 'bg-white');
+        }
+      }
+    }
+
+    function proceedToFinalCheckout() {
+      const checkbox = document.getElementById('checkoutConsentCheckbox');
+      const errorMsg = document.getElementById('checkoutConsentError');
+      const container = document.getElementById('checkoutCheckboxContainer');
+
+      // Validação estrita do checkbox obrigatório
+      if (!checkbox || !checkbox.checked) {
+        if (errorMsg) errorMsg.classList.remove('hidden');
+        if (container) {
+          container.classList.remove('border-gray-200', 'bg-white');
+          container.classList.add('border-rose-400', 'bg-rose-50/40');
+        }
+        return;
+      }
+
+      // Fecha o modal de confirmação
+      closeCheckoutConfirmModal();
+
+      // Executa o redirecionamento com feedback visual
+      triggerFinalCheckoutRedirect();
+    }
+
+    function triggerFinalCheckoutRedirect() {
+      const isPt = currentLang === 'pt';
+      const checkoutUrl = isPt ? CHECKOUT_CONFIG.pt : CHECKOUT_CONFIG.en;
+
+      const modal = document.getElementById('actionModal');
+      const card = document.getElementById('modalCard');
+      const title = document.getElementById('modalTitle');
+      const desc = document.getElementById('modalDesc');
+      const confirmBtn = document.getElementById('modalConfirmBtn');
+      const closeBtn = document.getElementById('modalCloseBtn');
+
+      // Título e feedback visual dinâmico
+      if (title) title.textContent = isPt ? "Pagamento Seguro Gemini Pro" : "Gemini Pro Secure Checkout";
+
+      const feedbackMessage = isPt 
+        ? "Redirecionando para o pagamento seguro via Pix..." 
+        : "Redirecting to secure Web3 / Card checkout...";
+
+      if (desc) {
+        desc.innerHTML = `
+          <div class="flex items-center gap-3 py-1">
+            <svg class="animate-spin h-5 w-5 text-google-blue shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <span class="font-medium text-google-dark text-sm sm:text-base">${feedbackMessage}</span>
+          </div>
+        `;
+      }
+
+      if (closeBtn) {
+        closeBtn.textContent = isPt ? "Fechar" : "Close";
+        closeBtn.onclick = closeModal;
+      }
+
+      if (confirmBtn) {
+        confirmBtn.textContent = isPt ? "Ir para Checkout" : "Go to Checkout";
+        confirmBtn.onclick = () => {
+          window.open(checkoutUrl, '_blank');
+          closeModal();
+        };
+      }
+
+      // Exibe o feedback visual através do modal/toast
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-95');
+      card.classList.add('scale-100');
+
+      // Redireciona em nova aba após feedback visual rápido (750ms)
+      setTimeout(() => {
+        window.open(checkoutUrl, '_blank');
+        setTimeout(() => {
+          closeModal();
+        }, 1200);
+      }, 750);
+    }
+
+    /**
+     * handleCheckout agora abre o modal de confirmação pré-checkout obrigatório
+     */
+    function handleCheckout() {
+      openCheckoutConfirmModal();
+    }
+
+    // Modal Notifications (Clean Google Dialog instead of alert())
+    function triggerAction(actionType) {
+      if (actionType === 'trial' || actionType === 'pro_checkout') {
+        handleCheckout();
+        return;
+      }
+
+      const modal = document.getElementById('actionModal');
+      const card = document.getElementById('modalCard');
+      const title = document.getElementById('modalTitle');
+      const desc = document.getElementById('modalDesc');
+      const confirmBtn = document.getElementById('modalConfirmBtn');
+      const closeBtn = document.getElementById('modalCloseBtn');
+
+      if (closeBtn) {
+        closeBtn.textContent = currentLang === 'pt' ? "Fechar" : "Close";
+        closeBtn.onclick = closeModal;
+      }
+      if (confirmBtn) {
+        confirmBtn.textContent = currentLang === 'pt' ? "Continuar" : "Continue";
+        confirmBtn.onclick = closeModal;
+      }
+
+      if (actionType === 'free') {
+        title.textContent = currentLang === 'pt' ? "Acessar Gemini Standard" : "Access Gemini Standard";
+        desc.textContent = currentLang === 'pt'
+          ? "Conectando à sua Conta Google para disponibilizar a versão cotidiana gratuita do Gemini."
+          : "Connecting to your Google Account to initialize your free everyday Gemini experience.";
+      }
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-95');
+      card.classList.add('scale-100');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('actionModal');
+      const card = document.getElementById('modalCard');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-100');
+      card.classList.add('scale-95');
+    }
+
+    // Close modal on click outside (Backdrop handlers)
+    document.getElementById('actionModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('actionModal')) {
+        closeModal();
+      }
+    });
+
+    document.getElementById('checkoutConfirmModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('checkoutConfirmModal')) {
+        closeCheckoutConfirmModal();
+      }
+    });
+
+    document.getElementById('institutionalModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('institutionalModal')) {
+        closeInstitutionalModal();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+        closeCheckoutConfirmModal();
+        closeInstitutionalModal();
+      }
+    });
+
+    // Intersection Observer for scroll animations
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+      // Auto-detect location & set language and currency
+      autoDetectLocationAndSetLanguage();
+
+      // Initial render of demo
+      renderDemoContent();
+    });
+  </script>
+</body>
+</html>
