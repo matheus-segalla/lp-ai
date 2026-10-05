@@ -1038,8 +1038,8 @@
       // Gateway Pix-to-Crypto (Brasil - R$ 94,90)
       pt: 'https://pay.hodle.com.br/checkout-demo',
 
-      // Gateway Internacional Crypto / Card ($40)
-      en: 'https://helio.co/pay/checkout-demo'
+      // Gateway Internacional Stripe Checkout (US$ 19,90)
+      en: '/api/create-checkout-session'
     };
 
     // State Management
@@ -1467,15 +1467,9 @@ Reallocate Sprint 34 to prioritize native data export pipelines and automated te
           subPriceEl.textContent = "Economia de R$ 180 ao ano (15% OFF)";
         }
       } else {
-        if (currentBilling === 'monthly') {
-          priceEl.textContent = "$40";
-          periodEl.textContent = " / month";
-          subPriceEl.textContent = "Instant access via Web3 / Card • Immediate activation";
-        } else {
-          priceEl.textContent = "$34";
-          periodEl.textContent = " / month billed annually";
-          subPriceEl.textContent = "Save over $72 per year (15% OFF)";
-        }
+        priceEl.textContent = "$19.90";
+        periodEl.textContent = " / one-time";
+        subPriceEl.textContent = "Secure Stripe Checkout • Instant access";
       }
     }
 
@@ -1917,7 +1911,7 @@ Reallocate Sprint 34 to prioritize native data export pipelines and automated te
         if (isPt) {
           billingEl.textContent = isMonthly ? "(Mensal — Pix Seguro)" : "(Anual — Pix Seguro 15% OFF)";
         } else {
-          billingEl.textContent = isMonthly ? "(Monthly — Web3 / Card)" : "(Annual — Web3 / Card 15% OFF)";
+          billingEl.textContent = "(One-Time — Stripe Checkout)";
         }
       }
 
@@ -1925,7 +1919,7 @@ Reallocate Sprint 34 to prioritize native data export pipelines and automated te
         if (isPt) {
           priceEl.textContent = isMonthly ? "R$ 94,90" : "R$ 79,90";
         } else {
-          priceEl.textContent = isMonthly ? "$40" : "$34";
+          priceEl.textContent = "$19.90";
         }
       }
 
@@ -2007,7 +2001,7 @@ Reallocate Sprint 34 to prioritize native data export pipelines and automated te
       triggerFinalCheckoutRedirect();
     }
 
-    function triggerFinalCheckoutRedirect() {
+    async function triggerFinalCheckoutRedirect() {
       const isPt = currentLang === 'pt';
       const checkoutUrl = isPt ? CHECKOUT_CONFIG.pt : CHECKOUT_CONFIG.en;
 
@@ -2023,7 +2017,7 @@ Reallocate Sprint 34 to prioritize native data export pipelines and automated te
 
       const feedbackMessage = isPt 
         ? "Redirecionando para o pagamento seguro via Pix..." 
-        : "Redirecting to secure Web3 / Card checkout...";
+        : "Redirecting to official Stripe Checkout (US$ 19.90)...";
 
       if (desc) {
         desc.innerHTML = `
@@ -2042,6 +2036,51 @@ Reallocate Sprint 34 to prioritize native data export pipelines and automated te
         closeBtn.onclick = closeModal;
       }
 
+      // Exibe o feedback visual através do modal/toast
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      card.classList.remove('scale-95');
+      card.classList.add('scale-100');
+
+      // Se for a rota da API do Stripe
+      if (checkoutUrl === '/api/create-checkout-session' || !isPt) {
+        try {
+          const response = await fetch('/api/create-checkout-session', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+          });
+
+          const data = await response.json();
+
+          if (!response.ok || !data.url) {
+            throw new Error(data.error || 'Falha ao iniciar sessão de checkout no Stripe.');
+          }
+
+          if (confirmBtn) {
+            confirmBtn.textContent = "Ir para o Stripe";
+            confirmBtn.onclick = () => { window.location.href = data.url; };
+          }
+
+          // Redireciona para o checkout oficial do Stripe
+          setTimeout(() => {
+            window.location.href = data.url;
+          }, 600);
+          return;
+        } catch (apiError) {
+          console.error("Erro na API do Stripe:", apiError);
+          if (desc) {
+            desc.innerHTML = `
+              <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs sm:text-sm text-left">
+                <strong>Não foi possível conectar ao Stripe:</strong>
+                <p class="mt-1">${apiError.message}</p>
+                <p class="mt-2 text-[11px] text-rose-500">Certifique-se de configurar a variável STRIPE_SECRET_KEY no arquivo .env.local.</p>
+              </div>
+            `;
+          }
+          return;
+        }
+      }
+
+      // Fluxo padrão para links externos (Pix, etc.)
       if (confirmBtn) {
         confirmBtn.textContent = isPt ? "Ir para Checkout" : "Go to Checkout";
         confirmBtn.onclick = () => {
@@ -2050,12 +2089,6 @@ Reallocate Sprint 34 to prioritize native data export pipelines and automated te
         };
       }
 
-      // Exibe o feedback visual através do modal/toast
-      modal.classList.remove('opacity-0', 'pointer-events-none');
-      card.classList.remove('scale-95');
-      card.classList.add('scale-100');
-
-      // Redireciona em nova aba após feedback visual rápido (750ms)
       setTimeout(() => {
         window.open(checkoutUrl, '_blank');
         setTimeout(() => {

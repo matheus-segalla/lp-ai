@@ -1,0 +1,17 @@
+{
+  "name": "lp-ai-stripe",
+  "version": "1.0.0",
+  "description": "Landing page com integracao oficial Stripe Checkout e Webhooks",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "sqlite3": "^5.1.7",
+    "stripe": "^17.2.0"
+  }
+}
