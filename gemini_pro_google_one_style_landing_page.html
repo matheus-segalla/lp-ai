@@ -155,7 +155,7 @@
       <div class="flex items-center gap-3 sm:gap-4">
         <!-- Google One Style CTA Button -->
         <button onclick="handleCheckout()" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold rounded-full text-white bg-google-blue hover:bg-google-blueDark transition-all duration-200 shadow-sm hover:shadow-google focus:ring-4 focus:ring-blue-100">
-          <span data-i18n="nav_cta">Assinar Agora</span>
+          <span data-i18n="nav_cta">Obter Acesso</span>
         </button>
 
         <!-- Mobile Menu Toggle Button -->
@@ -176,7 +176,7 @@
       <a href="#faq" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-google-muted hover:text-google-blue" data-i18n="nav_faq">Dúvidas</a>
       <div class="pt-3">
         <button onclick="handleCheckout()" class="w-full py-3 text-center rounded-full text-white font-semibold bg-google-blue shadow">
-          <span data-i18n="nav_cta">Assinar Agora</span>
+          <span data-i18n="nav_cta">Obter Acesso</span>
         </button>
       </div>
     </div>
@@ -219,23 +219,23 @@
         <!-- CTA Buttons Row -->
         <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button onclick="handleCheckout()" class="w-full sm:w-auto px-8 py-3.5 rounded-full text-base font-semibold text-white bg-google-blue hover:bg-google-blueDark transition-all duration-200 shadow-google hover:shadow-google-hover flex items-center justify-center gap-2 group">
-            <span data-i18n="hero_primary_cta">Assinar Gemini Pro</span>
+            <span data-i18n="hero_primary_cta">Obter Gemini Pro (US$ 19,90)</span>
             <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
             </svg>
           </button>
           
           <a href="#planos" class="w-full sm:w-auto px-8 py-3.5 rounded-full text-base font-semibold text-google-dark bg-white hover:bg-gray-50 border border-google-border transition-all duration-200 shadow-sm hover:shadow flex items-center justify-center gap-2">
-            <span data-i18n="hero_secondary_cta">Ver planos e valores</span>
+            <span data-i18n="hero_secondary_cta">Ver detalhes e valor</span>
           </a>
         </div>
 
         <!-- Guarantee Notice -->
-        <p class="mt-3.5 text-xs text-google-muted flex items-center justify-center gap-1.5" data-i18n="hero_guarantee">
-          <svg class="w-4 h-4 text-emerald-600 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <p class="mt-3.5 text-xs text-google-muted flex items-center justify-center gap-1.5">
+          <svg class="w-4 h-4 text-emerald-600 inline shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
           </svg>
-          Acesso imediato • Cancele online a qualquer momento com 1 clique
+          <span data-i18n="hero_guarantee">Acesso imediato • Pagamento único sem renovação automática</span>
         </p>
 
         <!-- Hero Interactive Multimodal Preview Card -->
@@ -625,20 +625,15 @@
         
         <div class="text-center max-w-3xl mx-auto mb-12">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-google-blue text-xs font-semibold mb-3">
-            <span data-i18n="pricing_badge">Assinatura Google One AI Premium</span>
+            <span data-i18n="pricing_badge">Acesso Exclusivo Gemini Pro</span>
           </div>
-          <h2 class="text-3xl sm:text-5xl font-extrabold text-google-dark tracking-tight" data-i18n="pricing_title">Investimento transparente e flexível</h2>
-          <p class="mt-4 text-base sm:text-lg text-google-muted" data-i18n="pricing_subtitle">Ativação instantânea com recursos premium. Cancele com um toque no seu painel Google.</p>
+          <h2 class="text-3xl sm:text-5xl font-extrabold text-google-dark tracking-tight" data-i18n="pricing_title">Investimento único e transparente</h2>
+          <p class="mt-4 text-base sm:text-lg text-google-muted" data-i18n="pricing_subtitle">Ativação instantânea com recursos premium. Pagamento único via Stripe, sem mensalidades ou cobranças recorrentes.</p>
           
-          <!-- Billing Cycle Selector (Monthly / Annual) -->
-          <div class="mt-8 inline-flex items-center p-1 bg-google-grayBg rounded-full border border-google-border">
-            <button onclick="setBillingCycle('monthly')" id="billMonthlyBtn" class="px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-google-dark shadow-sm">
-              <span data-i18n="billing_monthly">Cobrança Mensal</span>
-            </button>
-            <button onclick="setBillingCycle('annual')" id="billAnnualBtn" class="px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all text-google-muted hover:text-google-dark flex items-center gap-1.5">
-              <span data-i18n="billing_annual">Cobrança Anual</span>
-              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full" data-i18n="billing_discount">ECONOMIZE 15%</span>
-            </button>
+          <!-- One-Time Payment Highlight Pill -->
+          <div class="mt-8 inline-flex items-center gap-2.5 px-6 py-2.5 bg-blue-50/90 rounded-full border border-blue-200 text-xs sm:text-sm font-bold text-google-blue shadow-xs">
+            <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            <span data-i18n="billing_badge">Pagamento Único • Sem Mensalidades • Acesso Garantido</span>
           </div>
         </div>
 
@@ -752,10 +747,10 @@
 
             <div class="mt-8 space-y-2">
               <button onclick="handleCheckout()" class="w-full py-3.5 px-4 rounded-full text-base font-semibold text-white bg-google-blue hover:bg-google-blueDark transition-all duration-200 shadow-google hover:shadow-google-hover flex items-center justify-center gap-2">
-                <span data-i18n="card_pro_cta">Assinar Gemini Pro</span>
+                <span data-i18n="card_pro_cta">Obter Gemini Pro (US$ 19,90)</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
               </button>
-              <p class="text-center text-[11px] text-google-muted" data-i18n="card_pro_cancel_notice">Assinatura mensal flexível. Cancele quando quiser sem fidelidade.</p>
+              <p class="text-center text-[11px] text-google-muted" data-i18n="card_pro_cancel_notice">Pagamento único de US$ 19,90. Acesso garantido sem mensalidades ou taxas ocultas.</p>
             </div>
 
           </div>
@@ -780,11 +775,11 @@
           <!-- Item 1 -->
           <div class="bg-white rounded-2xl border border-google-border overflow-hidden transition-all">
             <button onclick="toggleFaq(1)" class="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 focus:outline-none">
-              <span class="font-bold text-google-dark text-base sm:text-lg" data-i18n="faq_q1">Como funciona a assinatura e liberação do acesso?</span>
+              <span class="font-bold text-google-dark text-base sm:text-lg" data-i18n="faq_q1">Como funciona o pagamento único e a liberação do acesso?</span>
               <svg id="faqIcon-1" class="w-5 h-5 text-google-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
             <div id="faqAnswer-1" class="px-5 sm:px-6 pb-6 text-sm text-google-muted leading-relaxed hidden">
-              <span data-i18n="faq_a1">Após a confirmação do pagamento, seu acesso a todas as funcionalidades do Gemini Pro e aos 2 TB de armazenamento do Google One é liberado instantaneamente na sua conta. Você pode gerenciar ou cancelar a renovação quando quiser.</span>
+              <span data-i18n="faq_a1">Após a confirmação do pagamento de US$ 19,90 via Stripe, seu acesso a todas as funcionalidades do Gemini Pro é liberado instantaneamente na sua conta. Como se trata de um pagamento único, você não precisa se preocupar com mensalidades, renovações automáticas ou cobranças recorrentes no seu cartão.</span>
             </div>
           </div>
 
@@ -847,7 +842,7 @@
             
             <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
               <button onclick="handleCheckout()" class="w-full sm:w-auto px-8 py-4 rounded-full text-base font-bold text-google-dark bg-white hover:bg-gray-100 transition-all shadow-lg hover:scale-105">
-                <span data-i18n="bottom_cta_btn">Assinar Gemini Pro Agora</span>
+                <span data-i18n="bottom_cta_btn">Obter Gemini Pro por US$ 19,90</span>
               </button>
             </div>
 
@@ -1053,14 +1048,14 @@
         nav_compare: "Comparativo",
         nav_pricing: "Planos",
         nav_faq: "Dúvidas",
-        nav_cta: "Assinar Agora",
+        nav_cta: "Obter Acesso",
         hero_pill: "Nova Era de Inteligência Artificial Google",
         hero_title_p1: "Eleve seu potencial com o",
         hero_title_gradient: "Gemini Pro",
         hero_subtitle: "Nossa inteligência multimodal mais refinada. Acesse uma janela de contexto massiva de até 2 milhões de tokens, raciocínio computacional sênior e integração perfeita ao ecossistema Google.",
-        hero_primary_cta: "Assinar Gemini Pro",
-        hero_secondary_cta: "Ver planos e valores",
-        hero_guarantee: "Acesso imediato • Cancele online a qualquer momento com 1 clique",
+        hero_primary_cta: "Obter Gemini Pro (US$ 19,90)",
+        hero_secondary_cta: "Ver detalhes e valor",
+        hero_guarantee: "Acesso imediato • Pagamento único sem renovação automática",
         hero_card_status: "Ultra Conexão Ativa",
         hero_loaded_title: "Entrada Multimodal Ativa",
         hero_prompt_label: "Seu comando:",
@@ -1132,12 +1127,10 @@
         comp_row6_title: "Treinamento de Dados",
         comp_row6_free: "Revisão por amostragem padrão",
         comp_row6_pro: "100% Privado — Zero treino nos seus dados",
-        pricing_badge: "Assinatura Google One AI Premium",
-        pricing_title: "Investimento transparente e flexível",
-        pricing_subtitle: "Ativação instantânea com recursos premium. Cancele com um toque no seu painel Google.",
-        billing_monthly: "Cobrança Mensal",
-        billing_annual: "Cobrança Anual",
-        billing_discount: "ECONOMIZE 15%",
+        pricing_badge: "Acesso Exclusivo Gemini Pro",
+        pricing_title: "Investimento único e transparente",
+        pricing_subtitle: "Ativação instantânea com recursos premium. Pagamento único via Stripe, sem mensalidades ou cobranças recorrentes.",
+        billing_badge: "Pagamento Único • Sem Mensalidades • Acesso Garantido",
         card_free_title: "Gemini Básico",
         card_free_badge: "Para todos",
         card_free_desc: "Para pesquisas do dia a dia, redação simples e perguntas gerais.",
@@ -1155,13 +1148,13 @@
         card_pro_item3: "2 TB (2.000 GB) de armazenamento em nuvem Google One",
         card_pro_item4: "Acesso prioritário a novos modelos de raciocínio",
         card_pro_item5: "Compartilhamento familiar em até 5 contas",
-        card_pro_cta: "Assinar Gemini Pro",
-        card_pro_cancel_notice: "Assinatura mensal flexível. Cancele quando quiser sem fidelidade.",
+        card_pro_cta: "Obter Gemini Pro (US$ 19,90)",
+        card_pro_cancel_notice: "Pagamento único de US$ 19,90. Acesso garantido sem mensalidades ou taxas ocultas.",
         faq_tag: "Perguntas Frequentes",
         faq_title: "Tire suas dúvidas sobre o Gemini Pro",
-        faq_subtitle: "Tudo o que você precisa saber sobre faturamento, recursos e segurança.",
-        faq_q1: "Como funciona a assinatura e liberação do acesso?",
-        faq_a1: "Após a confirmação do pagamento, seu acesso a todas as funcionalidades do Gemini Pro e aos 2 TB de armazenamento do Google One é liberado instantaneamente na sua conta. Você pode gerenciar ou cancelar a renovação quando quiser.",
+        faq_subtitle: "Tudo o que você precisa saber sobre pagamento único, recursos e segurança.",
+        faq_q1: "Como funciona o pagamento único e a liberação do acesso?",
+        faq_a1: "Após a confirmação do pagamento de US$ 19,90 via Stripe, seu acesso a todas as funcionalidades do Gemini Pro é liberado instantaneamente na sua conta. Como se trata de um pagamento único, você não precisa se preocupar com mensalidades, renovações automáticas ou cobranças recorrentes no seu cartão.",
         faq_q2: "O que significa ter uma janela de contexto de 2 milhões de tokens?",
         faq_a2: "A janela de contexto define o volume de informação que a IA consegue processar simultaneamente na memória de trabalho. Com 2 milhões de tokens, você pode enviar cerca de 1,4 milhão de palavras, 1 hora de vídeo ou dezenas de milhares de linhas de código em uma única requisição.",
         faq_q3: "Meus dados pessoais ou de trabalho são usados para treinar a IA?",
@@ -1170,7 +1163,7 @@
         faq_a4: "Sim! O plano inclui compartilhamento familiar do Google One com até 5 pessoas adicionais, dividindo o espaço total de armazenamento de 2 TB com total privacidade de dados individuais.",
         bottom_cta_title: "Pronto para transformar sua produtividade?",
         bottom_cta_subtitle: "Junte-se a milhões de profissionais e empresas que utilizam a inteligência artificial mais avançada da Google.",
-        bottom_cta_btn: "Assinar Gemini Pro Agora",
+        bottom_cta_btn: "Obter Gemini Pro por US$ 19,90",
         bottom_cta_terms: "Disponível em mais de 150 países • Suporte oficial Google 24/7",
         footer_legal_notice: `<strong class="text-google-dark font-semibold">Aviso Legal:</strong> Esta plataforma e suas ferramentas são independentes e não possuem afiliação, endosso ou vínculo oficial com a Google LLC, Google One ou Gemini.`,
         footer_terms: "Termos de Serviço",
@@ -1186,14 +1179,14 @@
         nav_compare: "Comparison",
         nav_pricing: "Plans",
         nav_faq: "FAQ",
-        nav_cta: "Subscribe Now",
+        nav_cta: "Get Access",
         hero_pill: "New Era of Google Artificial Intelligence",
         hero_title_p1: "Supercharge your work with",
         hero_title_gradient: "Gemini Pro",
         hero_subtitle: "Our most refined multimodal intelligence. Access a massive context window of up to 2 million tokens, senior computational reasoning, and seamless integration across Google Workspace.",
-        hero_primary_cta: "Get Gemini Pro",
-        hero_secondary_cta: "View plans & pricing",
-        hero_guarantee: "Instant activation • Cancel online anytime with 1 click",
+        hero_primary_cta: "Get Gemini Pro ($19.90)",
+        hero_secondary_cta: "View pricing details",
+        hero_guarantee: "Instant activation • One-time payment with zero auto-renewal",
         hero_card_status: "Ultra Connection Active",
         hero_loaded_title: "Active Multimodal Input",
         hero_prompt_label: "Your prompt:",
@@ -1265,12 +1258,10 @@
         comp_row6_title: "Model Data Training",
         comp_row6_free: "Standard quality sampling",
         comp_row6_pro: "100% Private — Zero training on your inputs",
-        pricing_badge: "Google One AI Premium Membership",
-        pricing_title: "Transparent and flexible investment",
-        pricing_subtitle: "Instant access to premium intelligence. Cancel with a single click from your Google account dashboard.",
-        billing_monthly: "Monthly Billing",
-        billing_annual: "Annual Billing",
-        billing_discount: "SAVE 15%",
+        pricing_badge: "Gemini Pro Exclusive Access",
+        pricing_title: "Transparent one-time investment",
+        pricing_subtitle: "Instant activation with premium capabilities. One-time payment via Stripe, no monthly fees or recurring subscriptions.",
+        billing_badge: "One-Time Payment • No Monthly Fees • Guaranteed Access",
         card_free_title: "Gemini Standard",
         card_free_badge: "For everyone",
         card_free_desc: "For quick daily inquiries, casual drafting, and general queries.",
@@ -1288,13 +1279,13 @@
         card_pro_item3: "2 TB (2,000 GB) Google One high-speed cloud storage",
         card_pro_item4: "Priority access to cutting-edge reasoning checkpoints",
         card_pro_item5: "Family sharing for up to 5 additional members",
-        card_pro_cta: "Subscribe to Gemini Pro",
-        card_pro_cancel_notice: "Flexible membership. Cancel anytime with zero fees.",
+        card_pro_cta: "Get Gemini Pro ($19.90)",
+        card_pro_cancel_notice: "One-time payment of $19.90. No recurring fees or hidden charges.",
         faq_tag: "Frequently Asked Questions",
         faq_title: "Common questions about Gemini Pro",
-        faq_subtitle: "Everything you need to know about billing, capabilities, and security.",
-        faq_q1: "How does subscription and activation work?",
-        faq_a1: "Immediately upon payment confirmation, full access to Gemini Pro features and 2 TB of Google One storage is unlocked for your account. You can manage or cancel your renewal anytime with zero hassle.",
+        faq_subtitle: "Everything you need to know about one-time payment, capabilities, and security.",
+        faq_q1: "How does the one-time payment and access unlock work?",
+        faq_a1: "Immediately upon confirmation of your $19.90 one-time payment via Stripe, full access to Gemini Pro features is unlocked for your account. Since this is a one-time purchase, you will never be charged recurring fees or subscription renewals.",
         faq_q2: "What does a 2 million token context window mean in practice?",
         faq_a2: "Context window defines how much material the AI can hold simultaneously in its immediate memory. With 2 million tokens, you can feed roughly 1.4 million words, 1 hour of video, or entire code repositories in a single prompt.",
         faq_q3: "Is my personal or business data used to train Google models?",
@@ -1303,7 +1294,7 @@
         faq_a4: "Yes! The subscription includes Google One Family Sharing, enabling you to share the 2 TB cloud storage pool with up to 5 additional people while keeping everyone's personal files private.",
         bottom_cta_title: "Ready to elevate your everyday output?",
         bottom_cta_subtitle: "Join millions of professionals and developers powered by Google's most sophisticated AI.",
-        bottom_cta_btn: "Get Gemini Pro Now",
+        bottom_cta_btn: "Get Gemini Pro for $19.90",
         bottom_cta_terms: "Available in 150+ countries • 24/7 dedicated Google support",
         footer_legal_notice: `<strong class="text-google-dark font-semibold">Legal Disclaimer:</strong> This platform and its tools are independent and have no official affiliation, endorsement, or relationship with Google LLC, Google One, or Gemini.`,
         footer_terms: "Terms of Service",
@@ -1551,12 +1542,14 @@ Reallocate Sprint 34 to prioritize native data export pipelines and automated te
       const monthlyBtn = document.getElementById('billMonthlyBtn');
       const annualBtn = document.getElementById('billAnnualBtn');
 
-      if (cycle === 'monthly') {
-        monthlyBtn.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-google-dark shadow-sm";
-        annualBtn.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all text-google-muted hover:text-google-dark flex items-center gap-1.5";
-      } else {
-        annualBtn.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-google-dark shadow-sm flex items-center gap-1.5";
-        monthlyBtn.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all text-google-muted hover:text-google-dark";
+      if (monthlyBtn && annualBtn) {
+        if (cycle === 'monthly') {
+          monthlyBtn.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-google-dark shadow-sm";
+          annualBtn.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all text-google-muted hover:text-google-dark flex items-center gap-1.5";
+        } else {
+          annualBtn.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-google-dark shadow-sm flex items-center gap-1.5";
+          monthlyBtn.className = "px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all text-google-muted hover:text-google-dark";
+        }
       }
       updatePriceDisplay();
     }
