@@ -1035,10 +1035,8 @@
      * - en: Gateway Internacional Crypto / Card ($40) -> ex: https://helio.co/pay/checkout-demo
      */
     const CHECKOUT_CONFIG = {
-      // Gateway Pix-to-Crypto (Brasil - R$ 94,90)
-      pt: 'https://pay.hodle.com.br/checkout-demo',
-
-      // Gateway Internacional Stripe Checkout (US$ 19,90)
+      // Gateway Oficial Stripe Checkout (US$ 19,90)
+      pt: '/api/create-checkout-session',
       en: '/api/create-checkout-session'
     };
 
@@ -2016,7 +2014,7 @@ Reallocate Sprint 34 to prioritize native data export pipelines and automated te
       if (title) title.textContent = isPt ? "Pagamento Seguro Gemini Pro" : "Gemini Pro Secure Checkout";
 
       const feedbackMessage = isPt 
-        ? "Redirecionando para o pagamento seguro via Pix..." 
+        ? "Redirecionando para o Stripe Checkout seguro (US$ 19,90)..." 
         : "Redirecting to official Stripe Checkout (US$ 19.90)...";
 
       if (desc) {
@@ -2042,7 +2040,7 @@ Reallocate Sprint 34 to prioritize native data export pipelines and automated te
       card.classList.add('scale-100');
 
       // Se for a rota da API do Stripe
-      if (checkoutUrl === '/api/create-checkout-session' || !isPt) {
+      if (checkoutUrl === '/api/create-checkout-session' || !checkoutUrl.startsWith('http')) {
         try {
           const response = await fetch('/api/create-checkout-session', {
             method: 'POST',
