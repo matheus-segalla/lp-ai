@@ -102,7 +102,13 @@ app.post('/api/create-checkout-session', async (req, res) => {
       });
     }
 
-    const domain = process.env.DOMAIN || `http://localhost:${PORT}`;
+    // Detecção inteligente do domínio (caso DOMAIN seja o placeholder ou não informado)
+    let domain = process.env.DOMAIN;
+    if (!domain || domain.includes('seu-projeto.vercel.app')) {
+      const proto = req.headers['x-forwarded-proto'] || (req.secure ? 'https' : 'http');
+      const host = req.headers['x-forwarded-host'] || req.headers.host || `localhost:${PORT}`;
+      domain = `${proto}://${host}`;
+    }
     const priceId = process.env.STRIPE_PRICE_ID || 'price_1UNBPHJ8GWZznJJJCaeFtQAs';
 
     // Criação da sessão de checkout no Stripe
