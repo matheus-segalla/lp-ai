@@ -707,11 +707,11 @@
               <!-- Dynamic Price Display -->
               <div class="mb-2">
                 <div class="flex items-baseline gap-2">
-                  <span id="priceDisplay" class="text-4xl sm:text-5xl font-extrabold text-google-dark">R$ 94,90</span>
-                  <span id="periodDisplay" class="text-google-muted text-sm font-medium"> / mês</span>
+                  <span id="priceDisplay" class="text-4xl sm:text-5xl font-extrabold text-google-dark">US$ 19,90</span>
+                  <span id="periodDisplay" class="text-google-muted text-sm font-medium"> / pagamento único</span>
                 </div>
                 <div id="subPriceDisplay" class="text-xs text-emerald-600 font-semibold mt-1">
-                  Pagamento via Pix instantâneo • Liberação imediata
+                  Pagamento seguro via Stripe • Cartão de crédito • Liberação imediata
                 </div>
               </div>
 
@@ -924,10 +924,10 @@
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span class="font-bold text-google-dark">Gemini Pro</span>
-          <span class="text-google-muted font-normal" id="checkoutConfirmBillingLabel">(Mensal — Pix Seguro)</span>
+          <span class="text-google-muted font-normal" id="checkoutConfirmBillingLabel">(Pagamento Único — Stripe Seguro)</span>
         </div>
         <div class="font-extrabold text-google-dark text-base sm:text-lg" id="checkoutConfirmPriceLabel">
-          R$ 94,90
+          US$ 19,90
         </div>
       </div>
 
@@ -937,7 +937,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
         </svg>
         <span id="checkoutConfirmNoticeText">
-          Os recursos e credenciais computacionais são provisionados imediatamente após a liquidação do pagamento.
+          Os recursos e credenciais computacionais são provisionados imediatamente após a liquidação do pagamento no Stripe.
         </span>
       </div>
 
@@ -946,7 +946,7 @@
         <label class="flex items-start gap-3 cursor-pointer select-none text-xs sm:text-sm leading-relaxed text-google-dark">
           <input type="checkbox" id="checkoutConsentCheckbox" onchange="onCheckoutConsentChange()" class="mt-1 w-4 h-4 rounded text-google-blue border-gray-300 focus:ring-google-blue focus:ring-2 cursor-pointer shrink-0">
           <span id="checkoutConsentLabel" class="font-medium text-gray-700">
-            Estou ciente de que o acesso é liberado de forma imediata e definitiva, e que pagamentos via Pix com liquidação em criptoativos ou via carteira Web3 não possuem estorno unilateral.
+            Estou ciente de que o acesso é liberado de forma imediata e definitiva, e que o pagamento de US$ 19,90 via Stripe processa a entrega digital instantânea.
           </span>
         </label>
       </div>
@@ -1455,19 +1455,13 @@ Reallocate Sprint 34 to prioritize native data export pipelines and automated te
       if (!priceEl || !periodEl || !subPriceEl) return;
 
       if (currentLang === 'pt') {
-        if (currentBilling === 'monthly') {
-          priceEl.textContent = "R$ 94,90";
-          periodEl.textContent = " / mês";
-          subPriceEl.textContent = "Pagamento via Pix instantâneo • Liberação imediata";
-        } else {
-          priceEl.textContent = "R$ 79,90";
-          periodEl.textContent = " / mês faturado anualmente";
-          subPriceEl.textContent = "Economia de R$ 180 ao ano (15% OFF)";
-        }
+        priceEl.textContent = "US$ 19,90";
+        periodEl.textContent = " / pagamento único";
+        subPriceEl.textContent = "Pagamento seguro via Stripe • Cartão de crédito • Liberação imediata";
       } else {
         priceEl.textContent = "$19.90";
         periodEl.textContent = " / one-time";
-        subPriceEl.textContent = "Secure Stripe Checkout • Instant access";
+        subPriceEl.textContent = "Secure Stripe Checkout • Credit card • Immediate access";
       }
     }
 
@@ -1906,31 +1900,23 @@ Reallocate Sprint 34 to prioritize native data export pipelines and automated te
         : "Secure environment with instant settlement & activation";
 
       if (billingEl) {
-        if (isPt) {
-          billingEl.textContent = isMonthly ? "(Mensal — Pix Seguro)" : "(Anual — Pix Seguro 15% OFF)";
-        } else {
-          billingEl.textContent = "(One-Time — Stripe Checkout)";
-        }
+        billingEl.textContent = isPt ? "(Pagamento Único — Stripe Seguro)" : "(One-Time — Stripe Checkout)";
       }
 
       if (priceEl) {
-        if (isPt) {
-          priceEl.textContent = isMonthly ? "R$ 94,90" : "R$ 79,90";
-        } else {
-          priceEl.textContent = "$19.90";
-        }
+        priceEl.textContent = isPt ? "US$ 19,90" : "$19.90";
       }
 
       if (noticeEl) {
         noticeEl.textContent = isPt
-          ? "Os recursos e credenciais computacionais são provisionados imediatamente após a liquidação do pagamento."
-          : "Compute resources and credentials are automatically provisioned immediately upon transaction confirmation.";
+          ? "Os recursos e credenciais computacionais são provisionados imediatamente após a liquidação do pagamento no Stripe."
+          : "Compute resources and credentials are automatically provisioned immediately upon transaction confirmation via Stripe.";
       }
 
       if (consentLabel) {
         consentLabel.textContent = isPt
-          ? "Estou ciente de que o acesso é liberado de forma imediata e definitiva, e que pagamentos via Pix com liquidação em criptoativos ou via carteira Web3 não possuem estorno unilateral."
-          : "I acknowledge that access is granted immediately and irrevocably, and that instant Pix/crypto Web3 transactions cannot be unilaterally reversed.";
+          ? "Estou ciente de que o acesso é liberado de forma imediata e definitiva, e que o pagamento de US$ 19,90 via Stripe processa a entrega digital instantânea."
+          : "I acknowledge that access is granted immediately and irrevocably, and that the US$ 19.90 payment via Stripe processes instant digital delivery.";
       }
 
       if (errorText) {
