@@ -96,10 +96,9 @@ app.use(express.json());
 // =========================================================================
 app.post('/api/create-checkout-session', async (req, res) => {
   try {
+    const paymentLink = process.env.STRIPE_PAYMENT_LINK || 'https://buy.stripe.com/5kQ3cwaN5apP1fI4bH24000';
     if (!stripe) {
-      return res.status(500).json({
-        error: 'STRIPE_SECRET_KEY não foi configurada. Preencha sua chave secreta no arquivo .env.local.'
-      });
+      return res.json({ id: 'payment_link', url: paymentLink });
     }
 
     // Detecção inteligente do domínio (caso DOMAIN seja o placeholder ou não informado)

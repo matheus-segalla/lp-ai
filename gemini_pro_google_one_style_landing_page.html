@@ -1035,9 +1035,9 @@
      * - en: Gateway Internacional Crypto / Card ($40) -> ex: https://helio.co/pay/checkout-demo
      */
     const CHECKOUT_CONFIG = {
-      // Gateway Oficial Stripe Checkout (US$ 19,90)
-      pt: '/api/create-checkout-session',
-      en: '/api/create-checkout-session'
+      // Link Oficial Stripe Checkout (US$ 19,90)
+      pt: 'https://buy.stripe.com/5kQ3cwaN5apP1fI4bH24000',
+      en: 'https://buy.stripe.com/5kQ3cwaN5apP1fI4bH24000'
     };
 
     // State Management
@@ -2062,21 +2062,17 @@ Reallocate Sprint 34 to prioritize native data export pipelines and automated te
         }
       }
 
-      // Fluxo padrão para links externos (Pix, etc.)
+      // Fluxo para link oficial do Stripe Checkout
       if (confirmBtn) {
-        confirmBtn.textContent = isPt ? "Ir para Checkout" : "Go to Checkout";
+        confirmBtn.textContent = isPt ? "Ir para o Stripe" : "Go to Stripe";
         confirmBtn.onclick = () => {
-          window.open(checkoutUrl, '_blank');
-          closeModal();
+          window.location.href = checkoutUrl;
         };
       }
 
       setTimeout(() => {
-        window.open(checkoutUrl, '_blank');
-        setTimeout(() => {
-          closeModal();
-        }, 1200);
-      }, 750);
+        window.location.href = checkoutUrl;
+      }, 600);
     }
 
     /**
